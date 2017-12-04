@@ -1,0 +1,99 @@
+# Lampor tänds automatiskt vid solnedgången om någon är hemma
+- alias: "Automatisk belysning vid solnedgång"
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-01:00:00'
+
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.hall_light_spegel_switch
+
+# Skicka notis om någon switch är på men ingen är hemma
+- alias: "Skicka notis om eluttag är på men ingen är hemma"
+  trigger:
+    platform: state
+    entity_id: group.all_devices
+    from: 'home'
+
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.all_switches
+        state: 'on'
+
+  action:
+    - service: notify.ios_isaksiphone
+      data:
+        message: "Det verkar som att ingen är hemma men något eluttag är fortfarande på."
+
+# Lampa tänds automatiskt vid Isaks hemkomst och notiser skickas
+- alias: "Isak kommer hem"
+  trigger:
+    platform: state
+    entity_id: device_tracker.isaksiphone
+    to: 'home'
+
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.erikasiphone
+        state: 'not_home'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: device_tracker.erikasiphone
+            state: 'jobbet'
+          - condition: state
+            entity_id: device_tracker.erikasiphone
+            state: 'gymmet'
+          - condition: state
+            entity_id: device_tracker.erikasiphone
+            state: 'ica_bea'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.hall_light_spegel_switch
+
+    - service: notify.ios_isaksiphone
+      data:
+        message: "Välkommen hem Isak. Lampan i hallen är nu tänd."
+
+    - service: notify.ios_erikasiphone
+      data:
+        message: "Isak kom precis hem."
+
+# Lampa tänds automatiskt vid Isaks hemkomst och notiser skickas
+- alias: "Erika kommer hem"
+  trigger:
+    platform: state
+    entity_id: device_tracker.erikasiphone
+    to: 'home'
+
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.isaksiphone
+        state: 'not_home'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.hall_light_spegel_switch
+
+    - service: notify.ios_erikasiphone
+      data:
+        message: "Välkommen hem Erika. Lampan i hallen är nu tänd."
+
+    - service: notify.ios_isaksiphone
+      data:
+        message: "Erika kom precis hem."

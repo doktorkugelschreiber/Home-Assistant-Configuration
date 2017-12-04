@@ -1,0 +1,16 @@
+- name: Jobbet
+  latitude: 59.3343
+  longitude: 18.0627
+  radius: 500
+  icon: mdi:briefcase
+
+- name: Gymmet
+  latitude: 59.2927
+  longitude: 18.0783
+  radius: 200
+  icon: mdi:weight-kilogram
+
+- name: ICA bea
+  latitude: 59.2789
+  longitude: 18.0700
+  icon: mdi:cart

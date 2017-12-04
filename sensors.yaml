@@ -1,0 +1,62 @@
+# Weather information from Dark Sky
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - temperature
+      - temperature_max
+      - precip_intensity
+      - precip_type
+      - wind_speed
+      - cloud_cover
+      - humidity
+      - uv_index
+
+# System health information
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: processor_use
+      - type: since_last_boot
+
+# Stages of the moon
+  - platform: moon
+
+# Translating moon stages to Swedish
+  - platform: template
+    sensors:
+      moonstages:
+        friendly_name: "Månens stadie"
+        value_template: >
+          {%- if is_state("sensor.moon", "New moon") -%}
+            Nymåne
+          {%- elif is_state("sensor.moon", "Waxing crescent") -%}
+            Tilltagande skära
+          {%- elif is_state("sensor.moon", "First quarter") -%}
+            Halvmåne
+          {%- elif is_state("sensor.moon", "Waxing gibbous") -%}
+            Tilltagande halvmåne
+          {%- elif is_state("sensor.moon", "Full moon") -%}
+            Fullmåne
+          {%- elif is_state("sensor.moon", "Waning gibbous") -%}
+            Avtagande halvmåne
+          {%- elif is_state("sensor.moon", "Last quarter") -%}
+            Halvmåne
+          {%- elif is_state("sensor.moon", "Waning crescent") -%}
+            Avtagande skära
+          {%- endif -%}
+
+# Translating precipitation types to Swedish
+  - platform: template
+    sensors:
+      precip_types:
+        friendly_name: "Typ av nederbörd"
+        value_template: >
+          {%- if is_state("sensor.dark_sky_precip", "rain") -%}
+            Regn
+          {%- elif is_state("sensor.dark_sky_precip", "snow") -%}
+            Snö
+          {%- elif is_state("ssensor.dark_sky_precip", "sleet") -%}
+            Snöblandat regn
+          {%- endif -%}

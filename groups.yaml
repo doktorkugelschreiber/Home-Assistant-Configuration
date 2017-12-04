@@ -1,0 +1,108 @@
+######################################
+#           View in frontend         #
+######################################
+# What to view on home page
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - group.household
+      - group.weather
+
+# What to view on lights page
+  lights:
+    name: Belysning
+    view: yes
+    icon: mdi:lightbulb
+    entities:
+      - group.hall
+
+# What to view on devices page
+  devices:
+    name: Apparater
+    icon: mdi:power-socket-eu
+    view: yes
+
+# What to view on media page
+  media:
+    name: Media
+    icon: mdi:itunes
+    view: yes
+    entities:
+      - media_player.vardagsrum
+      - media_player.apple_tv
+
+# What to view on sensors page
+  sensors:
+    name: Sensorer
+    view: yes
+    icon: mdi:gauge
+    entities:
+      - group.household
+      - group.weather
+      - group.powerconsumption
+      - group.system
+
+# What to view on automations page
+  robot:
+    name: Robot
+    view: yes
+    icon: mdi:robot
+    entities:
+      - group.auto_override
+      - group.scenes
+
+######################################
+#         Groups within groups       #
+######################################
+# Groups within lights page
+  hall:
+    name: Hall
+    entities:
+      - switch.hall_light_spegel_switch
+
+# Groups within front and sensors page
+  weather:
+    name: "Väder"
+    entities:
+      - sun.sun
+      - sensor.moonstages
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_daily_high_temperature
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_precip_intensity
+      - sensor.precip_types
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_uv_index
+
+  household:
+    name: "Hushåll"
+    entities:
+      - device_tracker.erikasiphone
+      - device_tracker.isaksiphone
+
+  powerconsumption:
+    name: "Elförbrukning"
+    entities:
+      - sensor.hall_light_spegel_power
+
+  system:
+    name: "Status för systemet"
+    entities:
+      - sensor.ram_used
+      - sensor.cpu_used
+      - sensor.disk_used_
+      - sensor.since_last_boot
+
+# Groups within robot page
+  auto_override:
+    name: Inställning för automationer
+    entities:
+      - automation.automatisk_belysning_vid_solnedgang
+      - automation.erika_kommer_hem
+      - automation.isak_kommer_hem
+      - automation.skicka_notis_om_eluttag_ar_pa_men_ingen_ar_hemma
+
+  scenes:
+    name: Scener
