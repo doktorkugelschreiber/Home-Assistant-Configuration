@@ -1,4 +1,4 @@
-# Lampor tänds automatiskt vid solnedgången om någon är hemma
+# Lamps on at sunset and someone is home
 - alias: "Automatisk belysning vid solnedgång"
   trigger:
     platform: sun
@@ -16,7 +16,7 @@
     - service: homeassistant.turn_on
       entity_id: switch.hall_light_spegel_switch
 
-# Skicka notis om någon switch är på men ingen är hemma
+# Notify iOS if switch is on but no one is home
 - alias: "Skicka notis om eluttag är på men ingen är hemma"
   trigger:
     platform: state
@@ -35,7 +35,18 @@
       data:
         message: "Det verkar som att ingen är hemma men något eluttag är fortfarande på."
 
-# Lampa tänds automatiskt vid Isaks hemkomst och notiser skickas
+# Turn on light when someone comes home
+- alias: "Slå på belysning när någon kommer hem"
+  trigger:
+    platform: state
+    entity_id: group.all_devices
+    to: 'home'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.hall_light_spegel_switch
+
+# Notify Erika when Isak comes home
 - alias: "Isak kommer hem"
   trigger:
     platform: state
@@ -61,9 +72,6 @@
             state: 'ica_bea'
 
   action:
-    - service: homeassistant.turn_on
-      entity_id: switch.hall_light_spegel_switch
-
     - service: notify.ios_isaksiphone
       data:
         message: "Välkommen hem Isak. Lampan i hallen är nu tänd."
@@ -72,7 +80,7 @@
       data:
         message: "Isak kom precis hem."
 
-# Lampa tänds automatiskt vid Isaks hemkomst och notiser skickas
+# Notify Isak when Erika comes home
 - alias: "Erika kommer hem"
   trigger:
     platform: state
@@ -85,11 +93,19 @@
       - condition: state
         entity_id: device_tracker.isaksiphone
         state: 'not_home'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: device_tracker.isaksiphone
+            state: 'jobbet'
+          - condition: state
+            entity_id: device_tracker.isaksiphone
+            state: 'gymmet'
+          - condition: state
+            entity_id: device_tracker.isaksiphone
+            state: 'ica_bea'
 
-  action:
-    - service: homeassistant.turn_on
-      entity_id: switch.hall_light_spegel_switch
-
+    action:
     - service: notify.ios_erikasiphone
       data:
         message: "Välkommen hem Erika. Lampan i hallen är nu tänd."
