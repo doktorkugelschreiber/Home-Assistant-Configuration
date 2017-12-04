@@ -1,53 +1,46 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
   name: Hemma
-  # Location required to calculate the time the sun rises and sets
   latitude: !secret hass_latitude
   longitude: !secret hass_longitude
-  # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 33
-  # metric for Metric, imperial for Imperial
   unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Stockholm
-  # Customization file
   customize: !include customize.yaml
 
-# Enables the frontend
 frontend:
-
-# Enables configuration UI
 config:
+updater:
+map:
+sun:
+ios:
+conversation:
+tts:
+  - platform: google
+    language: sv
 
-# Enables Z-Wave Radio
-zwave:
-  usb_path: /dev/ttyACM0
-
-# Enables Web API
 http:
   api_password: !secret http_password
   base_url: !secret http_address
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
 
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
-
-# Discover some devices automatically
 discovery:
   ignore:
     - samsung_tv
 
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+zwave:
+  usb_path: /dev/ttyACM0
 
-# Enables support for tracking state changes over time
+device_tracker:
+ - platform: asuswrt
+   host: !secret router_ip
+   username: !secret router_username
+   password: !secret router_password
+   protocol: telnet
+   track_new_devices: true
+   consider_home: 180
+   interval_seconds: 12
+
 history:
   include:
     entities:
@@ -66,37 +59,35 @@ history:
       - sun.sun
       - switch.hall_light_spegel_switch
 
-# View all events in a logbook
 logbook:
+  exclude:
+    entites:
+      - group.all_devices
+      - media_player.apple_tv
+      - media_player.vardagsrum
+      - sensor.cpu_used
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_uv_index
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_daily_high_temperature
+      - sensor.disk_used_
+      - sensor.hall_light_spegel_power
+      - sensor.hall_light_spegel_alarm_level
+      - sensor.hall_light_spegel_alarm_type
+      - sensor.hall_light_spegel_energy
+      - sensor.hall_light_spegel_exporting
+      - sensor.hall_light_spegel_power_2
+      - sensor.hall_light_spegel_power_management
+      - sensor.hall_light_spegel_sourcenodeid
+      - sensor.moon
+      - sensor.precip_types
+      - sensor.ram_used
+      - sensor.since_last_boot
 
-# Enables a map showing the location of tracked devices
-map:
-
-# Track the sun
-sun:
-
-# Sensors
 sensor: !include sensors.yaml
-
-# Text to speech
-tts:
-  - platform: google
-    language: sv
-
-# Enabling iOS
-ios:
-
-# Nmap device tracker
-device_tracker:
- - platform: asuswrt
-   host: !secret router_ip
-   username: !secret router_username
-   password: !secret router_password
-   protocol: telnet
-   track_new_devices: true
-   consider_home: 180
-   interval_seconds: 12
-
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
