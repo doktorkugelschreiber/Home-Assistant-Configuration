@@ -40,6 +40,7 @@
     entities:
       - group.household
       - group.weather
+      - group.batteries
       - group.powerconsumption
       - group.system
 
@@ -103,6 +104,12 @@
       - sensor.cpu_used
       - sensor.disk_used_
       - sensor.since_last_boot
+
+  batteries:
+    name: Batterier
+    entities:
+      - sensor.erikas_iphone_battery_level
+      - sensor.isaks_iphone_battery_level
 
 # Groups within robot page
   auto_override:
