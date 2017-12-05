@@ -7,7 +7,7 @@
     icon: mdi:home
     entities:
       - group.household
-      - group.weather
+      - group.scenes
 
 # What to view on lights page
   lights:
@@ -62,7 +62,14 @@
     entities:
       - switch.hall_light_spegel_switch
 
-# Groups within front and sensors page
+# Groups within front page
+  scenes:
+    name: Scener
+    entities:
+      - script.morning
+      - script.night
+
+# Groups within sensors page
   weather:
     name: "Väder"
     entities:
@@ -105,9 +112,3 @@
       - automation.erika_kommer_hem
       - automation.isak_kommer_hem
       - automation.skicka_notis_om_eluttag_ar_pa_men_ingen_ar_hemma
-
-  scripts:
-    name: Scener
-    entities:
-      - script.morning
-      - script.night
