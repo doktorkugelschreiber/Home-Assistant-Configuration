@@ -89,6 +89,6 @@ logbook:
 
 sensor: !include sensors.yaml
 group: !include groups.yaml
-automation: !include_dir_list automation/
-script: !include scripts.yaml
+automation: !include_dir_list automations/
 zone: !include zones.yaml
+script: !include_dir_list scripts/

@@ -49,8 +49,9 @@
     view: yes
     icon: mdi:robot
     entities:
+      - group.scripts
       - group.auto_override
-      - group.scenes
+
 
 ######################################
 #         Groups within groups       #
@@ -105,5 +106,8 @@
       - automation.isak_kommer_hem
       - automation.skicka_notis_om_eluttag_ar_pa_men_ingen_ar_hemma
 
-  scenes:
+  scripts:
     name: Scener
+    entities:
+      - script.morning
+      - script.night_mode

@@ -1,0 +1,7 @@
+night_mode:
+  alias: God morgon
+  sequence:
+    - service: homeassistant.turn_on
+      entity_id: group.all_automations
+    - service: homeassistant.turn_on
+      entity_id: group.hall
