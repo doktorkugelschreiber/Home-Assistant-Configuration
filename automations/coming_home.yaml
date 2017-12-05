@@ -1,9 +1,9 @@
 # Turn on light when someone comes home
 alias: "Slå på belysning när någon kommer hem"
-  trigger:
-    platform: state
-    entity_id: group.all_devices
-    to: 'home'
+trigger:
+  platform: state
+  entity_id: group.all_devices
+  to: 'home'
 
 condition:
   condition: and
