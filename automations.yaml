@@ -69,7 +69,10 @@
             state: 'gymmet'
           - condition: state
             entity_id: device_tracker.erikasiphone
-            state: 'ica_bea'
+            state: 'ica'
+          - condition: state
+            entity_id: device_tracker.erikasiphone
+            state: 'universitetet'
 
   action:
     - service: notify.ios_isaksiphone
@@ -103,7 +106,10 @@
             state: 'gymmet'
           - condition: state
             entity_id: device_tracker.isaksiphone
-            state: 'ica_bea'
+            state: 'ica'
+          - condition: state
+            entity_id: device_tracker.isaksiphone
+            state: 'universitetet'
 
     action:
     - service: notify.ios_erikasiphone
