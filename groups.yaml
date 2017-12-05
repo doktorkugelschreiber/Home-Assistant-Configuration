@@ -65,6 +65,7 @@
 # Groups within front page
   scenes:
     name: Scener
+    control: hidden
     entities:
       - script.morning
       - script.night
