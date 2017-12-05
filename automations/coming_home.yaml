@@ -5,6 +5,13 @@
     entity_id: group.all_devices
     to: 'home'
 
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
   action:
     - service: homeassistant.turn_on
       entity_id: switch.hall_light_spegel_switch
