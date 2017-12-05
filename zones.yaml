@@ -19,3 +19,4 @@
   latitude: !secret university_latitude
   longitude: !secret university_longitude
   icon: mdi:school
+  radius: 300
