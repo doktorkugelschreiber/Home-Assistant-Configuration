@@ -14,3 +14,8 @@
   latitude: 59.2789
   longitude: 18.0700
   icon: mdi:cart
+
+- name: Universitetet
+  latitude: 59.3630
+  longitude: 18.0605
+  icon: mdi:school
