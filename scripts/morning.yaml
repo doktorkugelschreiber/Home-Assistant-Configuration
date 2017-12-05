@@ -1,4 +1,4 @@
-night_mode:
+morning_mode:
   alias: "Morgon"
   sequence:
     - service: homeassistant.turn_on
