@@ -1,21 +1,21 @@
 - name: jobbet
-  latitude: 59.3343
-  longitude: 18.0627
+  latitude: !secret work_latitude
+  longitude: !secret work_longitude
   radius: 500
   icon: mdi:briefcase
 
 - name: gymmet
-  latitude: 59.2927
-  longitude: 18.0783
+  latitude: !secret gym_latitude
+  longitude: !secret gym_longitude
   radius: 200
   icon: mdi:weight-kilogram
 
 - name: ICA
-  latitude: 59.2789
-  longitude: 18.0700
+  latitude: !secret shop_latitude
+  longitude: !secret shop_longitude
   icon: mdi:cart
 
 - name: universitetet
-  latitude: 59.3630
-  longitude: 18.0605
+  latitude: !secret university_latitude
+  longitude: !secret university_longitude
   icon: mdi:school
