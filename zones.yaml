@@ -10,7 +10,7 @@
   radius: 200
   icon: mdi:weight-kilogram
 
-- name: ICA bea
+- name: ICA
   latitude: 59.2789
   longitude: 18.0700
   icon: mdi:cart
