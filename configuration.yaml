@@ -63,6 +63,7 @@ logbook:
   exclude:
     entities:
       - group.all_devices
+      - group.all_automations
       - media_player.apple_tv
       - media_player.vardagsrum
       - sensor.cpu_used
@@ -86,6 +87,7 @@ logbook:
       - sensor.precip_types
       - sensor.ram_used
       - sensor.since_last_boot
+      - zwave.hall_light_spegel
 
 sensor: !include sensors.yaml
 group: !include groups.yaml

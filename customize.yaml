@@ -23,7 +23,10 @@ media_player.vardagsrum:
 #                                                  #
 ####################################################
 sensor.isaks_iphone_battery_level:
-  friendly_name: Batteri Isak
+  friendly_name: "Isaks iPhone"
+
+sensor.erikas_iphone_battery_level:
+  friendly_name: "Erikas iPhone"
 
 sensor.hall_light_spegel_power:
   icon: mdi:lightbulb
