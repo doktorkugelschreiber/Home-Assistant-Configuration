@@ -1,10 +1,10 @@
-- name: Jobbet
+- name: jobbet
   latitude: 59.3343
   longitude: 18.0627
   radius: 500
   icon: mdi:briefcase
 
-- name: Gymmet
+- name: gymmet
   latitude: 59.2927
   longitude: 18.0783
   radius: 200
@@ -15,7 +15,7 @@
   longitude: 18.0700
   icon: mdi:cart
 
-- name: Universitetet
+- name: universitetet
   latitude: 59.3630
   longitude: 18.0605
   icon: mdi:school
