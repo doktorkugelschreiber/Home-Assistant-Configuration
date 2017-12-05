@@ -1,7 +1,0 @@
-night_mode:
-  alias: "Sova"
-  sequence:
-    - service: homeassistant.turn_off
-      entity_id: group.all_automations
-    - service: homeassistant.turn_off
-      entity_id: group.hall

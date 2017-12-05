@@ -1,7 +1,6 @@
-morning_mode:
-  alias: "Morgon"
-  sequence:
-    - service: homeassistant.turn_on
-      entity_id: group.all_automations
-    - service: homeassistant.turn_on
-      entity_id: group.hall
+alias: "Morgon"
+sequence:
+  - service: homeassistant.turn_on
+    entity_id: group.all_automations
+  - service: homeassistant.turn_on
+    entity_id: group.hall

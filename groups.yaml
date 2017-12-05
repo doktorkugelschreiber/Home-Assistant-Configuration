@@ -110,4 +110,4 @@
     name: Scener
     entities:
       - script.morning
-      - script.night_mode
+      - script.night
