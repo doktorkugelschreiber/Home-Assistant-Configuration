@@ -3,7 +3,7 @@ alias: "Isak kommer hem"
 trigger:
   platform: state
   entity_id: device_tracker.isaksiphone
-    to: 'home'
+  to: 'home'
 
 condition:
   condition: and
