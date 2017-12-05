@@ -1,18 +1,18 @@
 # Notify iOS if switch is on but no one is home
-- alias: "Skicka notis om eluttag är på men ingen är hemma"
-  trigger:
-    platform: state
-    entity_id: group.all_devices
-    from: 'home'
+alias: "Skicka notis om eluttag är på men ingen är hemma"
+trigger:
+  platform: state
+  entity_id: group.all_devices
+  from: 'home'
 
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: group.all_switches
-        state: 'on'
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: group.all_switches
+      state: 'on'
 
-  action:
-    - service: notify.ios_isaksiphone
-      data:
-        message: "Det verkar som att ingen är hemma men något eluttag är fortfarande på."
+action:
+  - service: notify.ios_isaksiphone
+    data:
+      message: "Det verkar som att ingen är hemma men något eluttag är fortfarande på."

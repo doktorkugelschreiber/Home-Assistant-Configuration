@@ -61,7 +61,7 @@ history:
 
 logbook:
   exclude:
-    entites:
+    entities:
       - group.all_devices
       - media_player.apple_tv
       - media_player.vardagsrum
@@ -89,6 +89,6 @@ logbook:
 
 sensor: !include sensors.yaml
 group: !include groups.yaml
-automation: !include_dir_list automations/
+automation: !include_dir_merge_list automations/
 zone: !include zones.yaml
-script: !include_dir_list scripts/
+script: !include_dir_merge_list scripts/

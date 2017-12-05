@@ -1,0 +1,36 @@
+# Notify Isak when Erika comes home
+alias: "Erika kommer hem"
+trigger:
+  platform: state
+  entity_id: device_tracker.erikasiphone
+  to: 'home'
+
+condition:
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: device_tracker.isaksiphone
+      state: 'not_home'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: device_tracker.isaksiphone
+          state: 'jobbet'
+        - condition: state
+          entity_id: device_tracker.isaksiphone
+          state: 'gymmet'
+        - condition: state
+          entity_id: device_tracker.isaksiphone
+          state: 'ica'
+        - condition: state
+          entity_id: device_tracker.isaksiphone
+          state: 'universitetet'
+
+action:
+  - service: notify.ios_erikasiphone
+    data:
+      message: "Välkommen hem Erika. Lampan i hallen är nu tänd."
+
+  - service: notify.ios_isaksiphone
+    data:
+      message: "Erika kom precis hem."

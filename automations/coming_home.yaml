@@ -1,17 +1,17 @@
 # Turn on light when someone comes home
-- alias: "Slå på belysning när någon kommer hem"
+alias: "Slå på belysning när någon kommer hem"
   trigger:
     platform: state
     entity_id: group.all_devices
     to: 'home'
 
-  condition:
-    condition: and
-    conditions:
-      - condition: state
+condition:
+  condition: and
+  conditions:
+    - condition: state
         entity_id: sun.sun
         state: 'below_horizon'
 
-  action:
-    - service: homeassistant.turn_on
-      entity_id: switch.hall_light_spegel_switch
+action:
+  - service: homeassistant.turn_on
+    entity_id: switch.hall_light_spegel_switch
