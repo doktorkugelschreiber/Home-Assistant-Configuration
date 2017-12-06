@@ -56,38 +56,19 @@ history:
       - sensor.hall_light_spegel_power
       - sensor.isaks_iphone_battery_level
       - sensor.isaks_iphone_battery_state
+      - sensor.erikas_iphone_battery_level
+      - sensor.erikas_iphone_battery_state
       - sun.sun
       - switch.hall_light_spegel_switch
 
 logbook:
   exclude:
-    entities:
-      - group.all_devices
-      - group.all_automations
-      - media_player.apple_tv
-      - media_player.vardagsrum
-      - sensor.cpu_used
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_uv_index
-      - sensor.dark_sky_wind_speed
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_daily_high_temperature
-      - sensor.disk_used_
-      - sensor.hall_light_spegel_power
-      - sensor.hall_light_spegel_alarm_level
-      - sensor.hall_light_spegel_alarm_type
-      - sensor.hall_light_spegel_energy
-      - sensor.hall_light_spegel_exporting
-      - sensor.hall_light_spegel_power_2
-      - sensor.hall_light_spegel_power_management
-      - sensor.hall_light_spegel_sourcenodeid
-      - sensor.moon
-      - sensor.precip_types
-      - sensor.ram_used
-      - sensor.since_last_boot
-      - zwave.hall_light_spegel
+    domains:
+      - group
+      - automation
+      - media_player
+      - sensor
+      - zwave
 
 sensor: !include sensors.yaml
 group: !include groups.yaml

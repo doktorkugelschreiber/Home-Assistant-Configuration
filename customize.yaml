@@ -76,7 +76,7 @@ sensor.dark_sky_wind_speed:
   icon: mdi:weather-windy
 
 sun.sun:
-  friendly_name: "Solens stadie"
+  friendly_name: "Solen"
 
 sensor.moonstages:
   icon: mdi:weather-night
