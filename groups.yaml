@@ -67,6 +67,7 @@
     control: hidden
     entities:
       - script.morning
+      - script.evening
       - script.night
 
 # Groups within sensors page

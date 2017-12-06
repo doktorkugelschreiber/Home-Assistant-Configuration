@@ -1,5 +1,5 @@
-# Turn on light when someone comes home
-alias: "Slå på belysning när någon kommer hem"
+# Run evening script when someone comes home after sunset
+alias: "Kör kvällsläge vid hemkomst efter solnedgången"
 trigger:
   platform: state
   entity_id: group.all_devices
@@ -13,5 +13,7 @@ condition:
       state: 'below_horizon'
 
 action:
-  - service: homeassistant.turn_on
-    entity_id: switch.hall_light_spegel_switch
+  - service: script.turn_on
+    entity_id: script.evening
+  - service: script.turn_on
+    entity_id: script.logger_coming_home

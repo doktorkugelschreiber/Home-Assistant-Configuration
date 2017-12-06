@@ -1,0 +1,4 @@
+alias: "Kvällsläge"
+sequence:
+  - service: switch.turn_on
+    entity_id: switch.hall_light_spegel_switch

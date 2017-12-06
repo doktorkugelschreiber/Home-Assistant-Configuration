@@ -27,7 +27,7 @@ condition:
 action:
   - service: notify.ios_isaksiphone
     data:
-      message: "Välkommen hem Isak. Belysningen är tänd."
+      message: "Välkommen hem Isak."
 
   - service: notify.ios_erikasiphone
     data:

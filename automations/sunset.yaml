@@ -1,5 +1,5 @@
-# Lamps on at sunset and someone is home
-alias: "Automatisk belysning vid solnedgång"
+# Run evening script at sunset if someone is home
+alias: "Gå till kvällsläge vid solnedgången"
 trigger:
   platform: sun
   event: sunset
@@ -13,5 +13,7 @@ condition:
       state: 'home'
 
 action:
-  - service: homeassistant.turn_on
-    entity_id: switch.hall_light_spegel_switch
+  - service: script.turn_on
+    entity_id: script.evening
+  - service: script.turn_on
+    entity_id: script.logger_sunset
