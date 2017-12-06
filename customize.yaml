@@ -69,14 +69,14 @@ sensor.dark_sky_daily_high_temperature:
   friendly_name: "Idag blir det som varmast"
 
 sensor.dark_sky_uv_index:
-  friendly_name: UV Index
+  friendly_name: "UV Index"
 
 sensor.dark_sky_wind_speed:
   friendly_name: Vind
   icon: mdi:weather-windy
 
 sun.sun:
-  friendly_name: Solens stadie
+  friendly_name: "Solens stadie"
 
 sensor.moonstages:
   icon: mdi:weather-night
@@ -100,3 +100,14 @@ script.morning:
 
 script.night:
   icon: mdi:hotel
+
+####################################################
+#                                                  #
+#             HOME ASSISTANT GROUPS                #
+#                                                  #
+####################################################
+group.all_automations:
+  friendly_name: "Automationer"
+
+group.all_devices:
+  friendly_name: "Hushåll"
