@@ -6,30 +6,28 @@ trigger:
   to: 'home'
 
 condition:
-  condition: and
+  condition: or
   conditions:
     - condition: state
       entity_id: device_tracker.erikasiphone
       state: 'not_home'
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: device_tracker.erikasiphone
-          state: 'jobbet'
-        - condition: state
-          entity_id: device_tracker.erikasiphone
-          state: 'gymmet'
-        - condition: state
-          entity_id: device_tracker.erikasiphone
-          state: 'ica'
-        - condition: state
-          entity_id: device_tracker.erikasiphone
-          state: 'universitetet'
+    - condition: state
+      entity_id: device_tracker.erikasiphone
+      state: 'jobbet'
+    - condition: state
+      entity_id: device_tracker.erikasiphone
+      state: 'gymmet'
+    - condition: state
+      entity_id: device_tracker.erikasiphone
+      state: 'ica'
+    - condition: state
+      entity_id: device_tracker.erikasiphone
+      state: 'universitetet'
 
 action:
   - service: notify.ios_isaksiphone
     data:
-      message: "Välkommen hem Isak. Lampan i hallen är nu tänd."
+      message: "Välkommen hem Isak. Belysningen är tänd."
 
   - service: notify.ios_erikasiphone
     data:
