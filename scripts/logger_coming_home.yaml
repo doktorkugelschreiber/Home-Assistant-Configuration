@@ -1,3 +1,4 @@
+# Adding logbook entry when automations/coming_home.yaml is triggered
 add_logbook_entry:
   alias: "Log automation.coming_home"
   sequence:
