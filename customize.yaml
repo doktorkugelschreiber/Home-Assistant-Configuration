@@ -108,6 +108,8 @@ script.night:
 ####################################################
 group.all_automations:
   friendly_name: "Automationer"
+  hidden: false
 
 group.all_devices:
   friendly_name: "Hushåll"
+  hidden: false
