@@ -68,6 +68,7 @@
     entities:
       - script.morning
       - script.evening
+#     - script.bedtime
       - script.night
 
 # Groups within sensors page

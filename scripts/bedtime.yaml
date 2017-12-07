@@ -1,0 +1,8 @@
+alias: "Läggdags"
+sequence:
+  - service: switch.turn_off
+    entity_id: switch.hall_light_spegel_switch
+  - service: logbook.log
+    data_template:
+      name: Läggdags
+      message: aktiverades

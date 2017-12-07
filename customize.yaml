@@ -101,6 +101,9 @@ script.morning:
 script.evening:
   entity_picture: /local/sunset.png
 
+script.bedtime:
+  entity_picture: /local/bed.png
+
 script.night:
   entity_picture: /local/sleeping-face.png
 
