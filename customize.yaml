@@ -96,10 +96,13 @@ sensor.precip_types:
 #                                                  #
 ####################################################
 script.morning:
-  icon: mdi:coffee
+  entity_picture: /local/coffee.png
+
+script.evening:
+  entity_picture: /local/sunset.png
 
 script.night:
-  icon: mdi:hotel
+  entity_picture: /local/sleeping-face.png
 
 ####################################################
 #                                                  #
