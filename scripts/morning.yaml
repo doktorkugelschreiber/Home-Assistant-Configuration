@@ -1,6 +1,10 @@
-alias: "Morgonläge"
+alias: "Morgon"
 sequence:
   - service: homeassistant.turn_on
     entity_id: group.all_automations
   - service: homeassistant.turn_on
     entity_id: group.hall
+  - service: logbook.log
+    data_template:
+      name: Morgonläge
+      message: aktiverades
