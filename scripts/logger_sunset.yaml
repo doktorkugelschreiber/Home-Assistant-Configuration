@@ -1,8 +1,7 @@
 # Adding logbook entry when automations/sunset.yaml is triggered
-add_logbook_entry:
-  alias: "Log automation.sunset"
-  sequence:
-    - service: logbook.log
-      data_template:
-          name: Automationen Gå till kvällsläge vid solnedgången
-          message: kördes
+alias: "Log automation.sunset"
+sequence:
+  - service: logbook.log
+    data_template:
+        name: Automationen Gå till kvällsläge vid solnedgången
+        message: kördes
