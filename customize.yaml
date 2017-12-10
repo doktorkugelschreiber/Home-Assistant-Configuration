@@ -4,8 +4,20 @@
 #                                                  #
 ####################################################
 # Hallen
-switch.hall_light_spegel_switch:
+switch.hall_spegel_switch:
   friendly_name: Spegel
+  icon: mdi:lightbulb
+  homebridge_visible: true
+
+# Vardagsrummet
+switch.livingroom_window_switch:
+  friendly_name: Fönster
+  icon: mdi:lightbulb
+  homebridge_visible: true
+
+# Sovrummet
+switch.bedroom_window_switch:
+  friendly_name: Fönster
   icon: mdi:lightbulb
   homebridge_visible: true
 
@@ -28,9 +40,17 @@ sensor.isaks_iphone_battery_level:
 sensor.erikas_iphone_battery_level:
   friendly_name: "Erikas iPhone"
 
-sensor.hall_light_spegel_power:
+sensor.hall_spegel_power:
   icon: mdi:lightbulb
   friendly_name: "Hall: Spegel"
+
+sensor.livingroom_window_power:
+  icon: mdi:lightbulb
+  friendly_name: "Vardagsrum: Fönster"
+
+sensor.bedroom_window_power:
+  icon: mdi:lightbulb
+  friendly_name: "Sovrum: Fönster"
 
 sensor.ram_used:
   friendly_name: "Användning av RAM-minne"

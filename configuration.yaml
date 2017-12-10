@@ -8,6 +8,7 @@ homeassistant:
   customize: !include customize.yaml
 
 frontend:
+
 config:
 updater:
 map:

@@ -2,8 +2,10 @@ alias: "Morgon"
 sequence:
   - service: homeassistant.turn_on
     entity_id: group.all_automations
-  - service: homeassistant.turn_on
-    entity_id: group.hall
+  - service: switch.turn_on
+    entity_id: switch.hall_spegel_switch
+  - service: switch.turn_on
+    entity_id: switch.livingroom_window_switch
   - service: logbook.log
     data_template:
       name: Morgonläge

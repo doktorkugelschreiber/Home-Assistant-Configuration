@@ -32,3 +32,21 @@ Det regnar inte just nu.
 {%- else -%}
   Erika är {{ states("device_tracker.erikasiphone") }} och Isak är {{ states("device_tracker.isaksiphone") }}
 {%- endif %}.
+
+HALL
+{% if is_state("switch.hall_light_spegel_switch", "on") %}
+  Spegel på ({{ states("sensor.hall_light_spegel_power") }} W)
+{%- else -%}
+  Spegel av
+{%- endif %}
+
+VARDAGSRUM
+{% if is_state("media_player.vardagsrum", "playing") %}
+  {% if states.media_player.vardagsrum.attributes.media_artist == "TV" %}
+    Soundbar på (TV)
+  {%- else -%}
+    Soundbar spelar "{{ states.media_player.vardagsrum.attributes.media_title }}" med {{ states.media_player.vardagsrum.attributes.media_artist }}.
+  {%- endif -%}
+{%- else -%}
+  Soundbar av
+{%- endif %}

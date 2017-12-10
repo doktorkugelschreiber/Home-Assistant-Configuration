@@ -1,7 +1,7 @@
 alias: "Läggdags"
 sequence:
   - service: switch.turn_off
-    entity_id: switch.hall_light_spegel_switch
+    entity_id: switch.hall_spegel_switch
   - service: logbook.log
     data_template:
       name: Läggdags

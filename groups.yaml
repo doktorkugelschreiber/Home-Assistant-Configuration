@@ -17,6 +17,8 @@
     icon: mdi:lightbulb
     entities:
       - group.hall
+      - group.vardagsrum
+      - group.bedroom
 
 # What to view on devices page
   devices:
@@ -32,6 +34,7 @@
     entities:
       - media_player.vardagsrum
       - media_player.apple_tv
+      - group.atv_remote
 
 # What to view on sensors page
   sensors:
@@ -59,7 +62,17 @@
   hall:
     name: Hall
     entities:
-      - switch.hall_light_spegel_switch
+      - switch.hall_spegel_switch
+
+  vardagsrum:
+    name: Vardagsrum
+    entities:
+      - switch.livingroom_window_switch
+
+  bedroom:
+    name: Sovrum
+    entities:
+      - switch.bedroom_window_switch
 
 # Groups within front page
   scenes:
@@ -89,7 +102,9 @@
   powerconsumption:
     name: "Elförbrukning"
     entities:
-      - sensor.hall_light_spegel_power
+      - sensor.hall_spegel_power
+      - sensor.livingroom_window_power
+      - sensor.bedroom_window_power
 
   system:
     name: "Status för systemet"

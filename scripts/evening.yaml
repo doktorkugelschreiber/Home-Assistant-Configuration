@@ -1,7 +1,11 @@
 alias: "Kväll"
 sequence:
   - service: switch.turn_on
-    entity_id: switch.hall_light_spegel_switch
+    entity_id: switch.hall_spegel_switch
+  - service: switch.turn_on
+    entity_id: switch.livingroom_window_switch
+  - service: switch.turn_on
+    entity_id: switch.bedroom_window_switch
   - service: logbook.log
     data_template:
       name: Kvällsläge
