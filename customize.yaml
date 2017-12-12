@@ -15,6 +15,10 @@ switch.livingroom_window_switch:
   icon: mdi:lightbulb
   homebridge_visible: true
 
+light.livingroom_cornerlight_level:
+  friendly_name: Soffan
+  homebridge_visible: true
+
 # Sovrummet
 switch.bedroom_window_switch:
   friendly_name: Fönster
@@ -64,10 +68,10 @@ sensor.bedroom_window_power:
 
 sensor.kitchen_window_power:
   icon: mdi:lightbulb
-  friendly_name: "Sovrum: Fönster"
+  friendly_name: "Kök: Fönster"
 
 sensor.kitchen_coffeebrewer_power:
-  friendly_name: "Sovrum: Fönster"
+  friendly_name: "Kök: Kaffebryggare"
 
 sensor.ram_used:
   friendly_name: "Användning av RAM-minne"

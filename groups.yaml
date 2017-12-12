@@ -63,6 +63,7 @@
     name: Vardagsrum
     entities:
       - switch.livingroom_window_switch
+      - light.livingroom_cornerlight_level
 
   kitchen:
     name: "Kök"
