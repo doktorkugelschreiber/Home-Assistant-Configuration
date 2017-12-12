@@ -21,6 +21,16 @@ switch.bedroom_window_switch:
   icon: mdi:lightbulb
   homebridge_visible: true
 
+# Köket
+switch.kitchen_window_switch:
+  friendly_name: Fönster
+  icon: mdi:lightbulb
+  homebridge_visible: true
+
+switch.kitchen_coffeebrewer_switch:
+  friendly_name: Kaffebryggare
+  homebridge_visible: true
+
 ####################################################
 #                                                  #
 #                   MEDIA PLAYERS                  #
@@ -50,6 +60,13 @@ sensor.livingroom_window_power:
 
 sensor.bedroom_window_power:
   icon: mdi:lightbulb
+  friendly_name: "Sovrum: Fönster"
+
+sensor.kitchen_window_power:
+  icon: mdi:lightbulb
+  friendly_name: "Sovrum: Fönster"
+
+sensor.kitchen_coffeebrewer_power:
   friendly_name: "Sovrum: Fönster"
 
 sensor.ram_used:

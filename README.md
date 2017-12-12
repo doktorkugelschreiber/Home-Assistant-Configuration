@@ -9,7 +9,7 @@ This is a copy of my Home Assistant Configuration. The configuration is a work i
 * Aetoec Z-Wave Stick (gen. 5)
 
 **Z-Wave Devices**
-* 3 x Fibaro Wall Plug
+* 5 x Fibaro Wall Plug
 
 **Other smart devices**
 * 1 x SONOS Playbar

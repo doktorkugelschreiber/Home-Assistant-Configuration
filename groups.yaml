@@ -11,20 +11,15 @@
       - group.weather
 
 # What to view on lights page
-  lights:
-    name: Belysning
+  devices:
+    name: Apparater
     view: yes
-    icon: mdi:lightbulb
+    icon: mdi:power-socket-eu
     entities:
       - group.hall
       - group.vardagsrum
+      - group.kitchen
       - group.bedroom
-
-# What to view on devices page
-  devices:
-    name: Apparater
-    icon: mdi:power-socket-eu
-    view: yes
 
 # What to view on media page
   media:
@@ -69,6 +64,12 @@
     entities:
       - switch.livingroom_window_switch
 
+  kitchen:
+    name: "Kök"
+    entities:
+      - switch.kitchen_window_switch
+      - switch.kitchen_coffeebrewer_switch
+
   bedroom:
     name: Sovrum
     entities:
@@ -105,6 +106,8 @@
       - sensor.hall_spegel_power
       - sensor.livingroom_window_power
       - sensor.bedroom_window_power
+      - sensor.kitchen_window_power
+      - sensor.kitchen_coffeebrewer_power
 
   system:
     name: "Status för systemet"
