@@ -75,6 +75,8 @@
     name: Sovrum
     entities:
       - switch.bedroom_window_switch
+      - light.bedroom_erikabedside_level
+      - light.bedroom_isakbedside_level
 
 # Groups within front page
   scenes:
@@ -83,8 +85,10 @@
     entities:
       - script.morning
       - script.evening
-#     - script.bedtime
+      - script.movietime
+      - script.bedtime
       - script.night
+      - script.templatetesting
 
 # Groups within sensors page
   weather:

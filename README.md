@@ -10,6 +10,7 @@ This is a copy of my Home Assistant Configuration. The configuration is a work i
 
 **Z-Wave Devices**
 * 5 x Fibaro Wall Plug
+* 3 x NEXA AD-147 Dimmable Wall Plug
 
 **Other smart devices**
 * 1 x SONOS Playbar

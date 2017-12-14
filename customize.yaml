@@ -25,6 +25,12 @@ switch.bedroom_window_switch:
   icon: mdi:lightbulb
   homebridge_visible: true
 
+light.bedroom_isakbedside_level:
+  friendly_name: "Isaks sänglampa"
+
+light.bedroom_erikabedside_level:
+  friendly_name: "Erikas sänglampa"
+
 # Köket
 switch.kitchen_window_switch:
   friendly_name: Fönster

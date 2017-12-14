@@ -2,10 +2,30 @@ alias: "Morgon"
 sequence:
   - service: homeassistant.turn_on
     entity_id: group.all_automations
+
   - service: switch.turn_on
-    entity_id: switch.hall_spegel_switch
+    entity_id: switch.kitchen_coffeebrewer_switch
+
+  - delay: 00:00:30
+
   - service: switch.turn_on
     entity_id: switch.livingroom_window_switch
+
+  - service: light.turn_on
+    entity_id: light.livingroom_cornerlight_level
+    data:
+      brightness: 100
+
+  - delay: 00:00:30
+
+  - service: switch.turn_on
+    entity_id: switch.kitchen_window_switch
+
+  - service: light.turn_on
+    entity_id: light.livingroom_cornerlight_level
+    data:
+      brightness: 180
+
   - service: logbook.log
     data_template:
       name: Morgonläge

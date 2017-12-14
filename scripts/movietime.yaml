@@ -1,14 +1,5 @@
-alias: "Sova"
+alias: "Titta på TV"
 sequence:
-  - service: homeassistant.turn_off
-    entity_id: group.all_automations
-
-  - service: switch.turn_off
-    entity_id: switch.livingroom_window_switch
-
-  - service: light.turn_off
-    entity_id: light.livingroom_cornerlight_level
-
   - service: switch.turn_off
     entity_id: switch.kitchen_window_switch
 
@@ -18,13 +9,27 @@ sequence:
   - service: switch.turn_off
     entity_id: switch.bedroom_window_switch
 
-  - service: light.turn_off
-    entity_id: light.bedroom_erikabedside_level
+  - service: switch.turn_on
+    entity_id: switch.livingroom_window_switch
 
-  - service: light.turn_off
+  - delay: 00:00:05
+
+  - service: light.turn_on
+    entity_id: light.livingroom_cornerlight_level
+    data:
+      brightness: 100
+
+  - service: light.turn_on
+    entity_id: light.bedroom_erikabedside_level
+    data:
+      brightness: 50
+
+  - service: light.turn_on
     entity_id: light.bedroom_isakbedside_level
+    data:
+      brightness: 50
 
   - service: logbook.log
     data_template:
-      name: Sovläge
+      name: "Titta på TV"
       message: aktiverades
