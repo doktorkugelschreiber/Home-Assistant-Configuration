@@ -1,0 +1,14 @@
+alias: "Turn off coffeebrewer after countdown"
+sequence:
+  - service: switch.turn_off
+    entity_id: switch.kitchen_coffeebrewer_switch
+
+  - service: notify.ios_isaksiphone
+    data:
+      title: "Timer"
+      message: "Kaffebryggaren stängdes av efter 45 minuter."
+
+  - service: notify.ios_erikasiphone
+    data:
+      title: "Timer"
+      message: "Kaffebryggaren stängdes av efter 45 minuter."
