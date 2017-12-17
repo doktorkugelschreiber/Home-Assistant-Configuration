@@ -1,0 +1,7 @@
+exclude:
+  domains:
+    - group
+    - automation
+    - media_player
+    - sensor
+    - zwave

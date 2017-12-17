@@ -1,0 +1,18 @@
+include:
+  entities:
+    - device_tracker.erikasiphone
+    - device_tracker.isaksiphone
+    - media_player.vardagsrum
+    - media_player.apple_tv
+    - sensor.dark_sky_cloud_coverage
+    - sensor.dark_sky_humidity
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_precip_intensity
+    - sensor.dark_sky_wind_speed
+    - sensor.hall_light_spegel_power
+    - sensor.isaks_iphone_battery_level
+    - sensor.isaks_iphone_battery_state
+    - sensor.erikas_iphone_battery_level
+    - sensor.erikas_iphone_battery_state
+    - sun.sun
+    - switch.hall_light_spegel_switch

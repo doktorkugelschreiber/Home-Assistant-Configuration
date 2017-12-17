@@ -109,7 +109,7 @@
   countdowns:
     name: Timers
     entities:
-        - automation.kaffebryggare_av_efter_45_minuter
+        - automation.kaffebryggare_av_efter_40_minuter
 
   automatic_scenes:
     name: Automatiska scenkörningar

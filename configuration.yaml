@@ -1,3 +1,7 @@
+# Home Assistant Configuration. Please see links below.
+# https://github.com/doktorkugelschreiber/Home-Assistant-Configuration/blob/master/README.md
+# https://home-assistant.io/getting-started/
+
 homeassistant:
   name: Hemma
   latitude: !secret hass_latitude
@@ -5,28 +9,29 @@ homeassistant:
   elevation: 33
   unit_system: metric
   time_zone: Europe/Stockholm
-  customize: !include customize.yaml
+  customize: !include config/customize.yaml
 
+  # https://home-assistant.io/docs/configuration/packages/
+  packages: !include_dir_named config/packages/
+
+# https://github.com/andrey-git/home-assistant-customizer
 customizer:
   custom_ui: local
 
+# https://home-assistant.io/components/frontend/
 frontend:
-# Include themes
-  themes: !include_dir_named themes/
+  themes: !include_dir_named config/themes/
+
+# https://home-assistant.io/docs/ecosystem/ios/
+ios:
+
+# Enable text-to-speech
+tts: !include config/tts.yaml
 
 config:
 updater:
 map:
-
-# Enable iOS Component
-ios:
-
 conversation:
-
-# Enable text-to-speech in Swedish language
-tts:
-  - platform: google
-    language: sv
 
 http:
   api_password: !secret http_password
@@ -38,61 +43,28 @@ discovery:
   ignore:
     - samsung_tv
 
-zwave:
-  usb_path: /dev/ttyACM0
-  device_config: !include zwave_device_config.yaml
+# Activate Z-Wave
+zwave: !include config/zwave.yaml
 
 # This shell command can be triggered from the service call component to disable the Z-Sticks flashing disco lights
 shell_command:
   disco_off: echo -e -n "\x01\x08\x00\xF2\x51\x01\x00\x05\x01\x51" > /dev/ttyACM0
 
 # Track devices from router connections
-device_tracker:
- - platform: asuswrt
-   host: !secret router_ip
-   username: !secret router_username
-   password: !secret router_password
-   protocol: telnet
-   track_new_devices: true
-   consider_home: 180
-   interval_seconds: 12
+device_tracker: !include config/device_tracker.yaml
 
 # Track the sun
 sun:
 
-history:
-  include:
-    entities:
-      - device_tracker.erikasiphone
-      - device_tracker.isaksiphone
-      - media_player.vardagsrum
-      - media_player.apple_tv
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_wind_speed
-      - sensor.hall_light_spegel_power
-      - sensor.isaks_iphone_battery_level
-      - sensor.isaks_iphone_battery_state
-      - sensor.erikas_iphone_battery_level
-      - sensor.erikas_iphone_battery_state
-      - sun.sun
-      - switch.hall_light_spegel_switch
+history: !include config/history.yaml
 
-logbook:
-  exclude:
-    domains:
-      - group
-      - automation
-      - media_player
-      - sensor
-      - zwave
+logbook: !include config/logbook.yaml
+
 
 # Inclusions
-input_select: !include_dir_named input_select/
-sensor: !include sensors.yaml
-group: !include groups.yaml
-automation: !include_dir_list automations/
-zone: !include zones.yaml
-script: !include_dir_named scripts/
+input_select: !include_dir_named config/input_select/
+sensor: !include config/sensors.yaml
+group: !include config/groups.yaml
+automation: !include_dir_list config/automations/
+zone: !include config/zones.yaml
+script: !include_dir_named config/scripts/

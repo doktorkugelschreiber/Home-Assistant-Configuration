@@ -1,0 +1,43 @@
+# Timer to turn off coffee brewer if it is still on after 40 minutes
+
+# When coffee brewer is started, trigger a countdown
+automation:
+  alias: "Kaffebryggare av efter 40 minuter"
+  trigger:
+    platform: state
+    entity_id: switch.kitchen_coffeebrewer_switch
+    to: 'on'
+
+  action:
+    - service: script.turn_on
+      entity_id: script.coffeecountdown
+
+# Countdown
+script:
+  coffeecountdown:
+    sequence:
+      - delay: 00:40:00
+
+# If brewer is still on, trigger "turn off" script.
+      - service_template: >
+          {%- if is_state('switch.kitchen_coffeebrewer_switch', 'on') -%}
+            script.turn_on
+          {%- else -%}
+          {%- endif %}
+        entity_id: script.turnoffcoffeebrewer
+
+# "Turn off" script
+  turnoffcoffeebrewer:
+    sequence:
+      - service: switch.turn_off
+        entity_id: switch.kitchen_coffeebrewer_switch
+
+      - service: notify.ios_isaksiphone
+        data:
+          title: "Timer"
+          message: "Kaffebryggaren stängdes av efter 40 minuter."
+
+      - service: notify.ios_erikasiphone
+        data:
+          title: "Timer"
+          message: "Kaffebryggaren stängdes av efter 40 minuter."

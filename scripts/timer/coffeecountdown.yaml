@@ -1,9 +1,0 @@
-alias: "Coffee Countdown"
-sequence:
-  - delay: 00:40:00
-  - service_template: >
-      {%- if is_state('switch.kitchen_coffeebrewer_switch', 'on') -%}
-        script.turn_on
-      {%- else -%}
-      {%- endif %}
-    entity_id: script.turnoffcoffeebrewer
