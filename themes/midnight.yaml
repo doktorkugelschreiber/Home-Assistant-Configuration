@@ -1,3 +1,6 @@
+## Theme from Home Assistant Community Forums
+## Original thread: https://community.home-assistant.io/t/midnight-theme/28598
+
 # Main colors
 primary-color: '#5294E2'                                                        # Header
 accent-color: '#E45E65'                                                         # Accent color

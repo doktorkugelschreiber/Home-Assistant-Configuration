@@ -1,7 +1,0 @@
-# Adding logbook entry when automations/coming_home.yaml is triggered
-alias: "Log automation.coming_home"
-sequence:
-  - service: logbook.log
-    data_template:
-        name: Automationen Kör kvällsläge vid hemkomst efter solnedgången
-        message: kördes

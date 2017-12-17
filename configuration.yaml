@@ -7,6 +7,9 @@ homeassistant:
   time_zone: Europe/Stockholm
   customize: !include customize.yaml
 
+customizer:
+  custom_ui: local
+
 frontend:
 # Include themes
   themes: !include_dir_named themes/
@@ -17,6 +20,7 @@ map:
 
 # Enable iOS Component
 ios:
+
 conversation:
 
 # Enable text-to-speech in Swedish language

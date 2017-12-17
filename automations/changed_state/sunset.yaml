@@ -17,6 +17,3 @@ action:
     data:
       entity_id: input_select.scenepicker
       option: "Hemma"
-
-  - service: script.turn_on
-    entity_id: script.logger_sunset
