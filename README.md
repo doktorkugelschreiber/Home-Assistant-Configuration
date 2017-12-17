@@ -37,9 +37,18 @@ In order to access the configuration files, you will need to set up Samba share,
 
 In the sidebar click "Hass.io" and on the top bar press the shopping bag. Click on Samba Share and install it. Open Samba Share and change the username and password. Then hit the Start button to start the addon.
 
-If you're using a Mac computer, open finder. Hit cmd+K and connect to smb://hassio.local. You will be asked which folder you want to open. Choose "config".
+If you're using a Mac computer, open finder. Hit `cmd+K` and connect to `smb://hassio.local`. You will be asked which folder you want to open. Choose `config`.
 
-You now have access to your configuration. In order to edit the .yaml files I recommend using a dedicated editor. I use [Atom](www.atom.io).
+You now have access to your configuration. In order to edit the `.yaml` files I recommend using a dedicated editor. I use [Atom](www.atom.io).
+
+## Installing Z-Wave
+1. Insert Z-Stick in Raspberry Pi USB Port.
+2. Open your `configuration.yaml`
+3. Add
+```
+zwave:
+  usb_path: /dev/ttyACM0
+```
 
 ## Components
 **Automations**
