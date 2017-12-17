@@ -1,10 +1,44 @@
+# The objective of this package is to create a scene picker in frontend.
+# If user picks a scene, that scene should be performed.
+# Other automations performing scenes should also go through scene picker so that frontend always shows the correct scene.
+
 # Define dropdown list to pick scenes from
 input_select:
-  name: "Välj scen"
-  options:
-    - "Morgon"
-    - "Borta"
-    - "Hemma"
-    - "TV"
-    - "Läggdags"
-    - "Sova"
+  scenepicker:
+    name: "Välj scen"
+    options:
+      - "Morgon"
+      - "Borta"
+      - "Hemma"
+      - "TV"
+      - "Läggdags"
+      - "Sova"
+
+# Perform actions based on which scene is picked.
+automation:
+  alias: "Kör scen"
+  hide_entity: true
+
+  trigger:
+    platform: state
+    entity_id: input_select.scenepicker
+
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.scenepicker", "Morgon") %}
+            script.morning
+          {%-elif is_state("input_select.scenepicker", "Borta") %}
+            script.leavinghome
+          {%-elif is_state("input_select.scenepicker", "Hemma") %}
+            script.evening
+          {%-elif is_state("input_select.scenepicker", "TV") %}
+            script.movietime
+          {%-elif is_state("input_select.scenepicker", "Läggdags") %}
+            script.bedtime
+          {%-elif is_state("input_select.scenepicker", "Sova") %}
+            script.night
+          {% else %}
+            none
+          {% endif %}

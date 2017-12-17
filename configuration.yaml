@@ -62,7 +62,6 @@ logbook: !include config/logbook.yaml
 
 
 # Inclusions
-input_select: !include_dir_named config/input_select/
 sensor: !include config/sensors.yaml
 group: !include config/groups.yaml
 automation: !include_dir_list config/automations/
