@@ -19,8 +19,8 @@ This is a copy of my Home Assistant Configuration. The configuration is a work i
 * 1 x Apple TV (gen. 3)
 
 # Guides
-1. Getting Started
-2. Installing Z-Wave
+1. [Getting Started](https://github.com/doktorkugelschreiber/Home-Assistant-Configuration/blob/master/documentation/Getting_Started.md)
+2. [Installing Z-Wave](https://github.com/doktorkugelschreiber/Home-Assistant-Configuration/blob/master/documentation/Installing_Z-Wave.md)
 
 ## Components
 **Automations**
