@@ -1,0 +1,10 @@
+# Define dropdown list to pick scenes from
+input_select:
+  name: "Välj scen"
+  options:
+    - "Morgon"
+    - "Borta"
+    - "Hemma"
+    - "TV"
+    - "Läggdags"
+    - "Sova"

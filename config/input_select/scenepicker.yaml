@@ -1,9 +1,0 @@
-# Define dropdown list
-name: "Välj scen"
-options:
-  - "Morgon"
-  - "Borta"
-  - "Hemma"
-  - "TV"
-  - "Läggdags"
-  - "Sova"
