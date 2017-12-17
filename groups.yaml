@@ -6,16 +6,13 @@
     view: yes
     icon: mdi:home
     entities:
-      - group.all_devices
-      - group.scenes
-      - group.weather
-
-# What to view on lights page
-  devices:
-    name: Apparater
-    view: yes
-    icon: mdi:power-socket-eu
-    entities:
+      - device_tracker.erikasiphone
+      - device_tracker.isaksiphone
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_wind_speed
+      - group.inputselect
       - group.hall
       - group.vardagsrum
       - group.kitchen
@@ -29,7 +26,6 @@
     entities:
       - media_player.vardagsrum
       - media_player.apple_tv
-      - group.atv_remote
 
 # What to view on sensors page
   sensors:
@@ -47,13 +43,20 @@
     view: yes
     icon: mdi:robot
     entities:
-      - group.all_automations
+      - group.countdowns
+      - group.automatic_scenes
+      - group.notifications
 
 
 ######################################
 #         Groups within groups       #
 ######################################
-# Groups within lights page
+# Groups within front page
+  inputselect:
+    name: "Välj scen"
+    entities:
+      - input_select.scenepicker
+
   hall:
     name: Hall
     entities:
@@ -78,33 +81,7 @@
       - light.bedroom_erikabedside_level
       - light.bedroom_isakbedside_level
 
-# Groups within front page
-  scenes:
-    name: Scener
-    control: hidden
-    entities:
-      - script.morning
-      - script.evening
-      - script.movietime
-      - script.bedtime
-      - script.night
-      - script.templatetesting
-
 # Groups within sensors page
-  weather:
-    name: "Väder"
-    entities:
-      - sun.sun
-      - sensor.moonstages
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_daily_high_temperature
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_precip_intensity
-      - sensor.precip_types
-      - sensor.dark_sky_wind_speed
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_uv_index
-
   powerconsumption:
     name: "Elförbrukning"
     entities:
@@ -115,7 +92,7 @@
       - sensor.kitchen_coffeebrewer_power
 
   system:
-    name: "Status för systemet"
+    name: "Systemstatus"
     entities:
       - sensor.ram_used
       - sensor.cpu_used
@@ -127,3 +104,24 @@
     entities:
       - sensor.erikas_iphone_battery_level
       - sensor.isaks_iphone_battery_level
+
+# Groups within automations page
+  countdowns:
+    name: Timers
+    entities:
+        - automation.kaffebryggare_av_efter_45_minuter
+
+  automatic_scenes:
+    name: Automatiska scenkörningar
+    entities:
+      - automation.kor_hemmalage_vid_solnedgangen
+      - automation.kor_hemmalage_vid_hemkomst_efter_solnedgangen
+      - automation.kor_tvlage_da_apple_tv_spelar_efter_solnedgang
+      - automation.kor_hemmalage_da_apple_tv_pausar_efter_solnedgang
+
+  notifications:
+    name: Notifieringar
+    entities:
+      - automation.erika_kommer_hem
+      - automation.isak_kommer_hem
+      - automation.skicka_notis_om_eluttag_ar_pa_men_ingen_ar_hemma

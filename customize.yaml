@@ -27,9 +27,11 @@ switch.bedroom_window_switch:
 
 light.bedroom_isakbedside_level:
   friendly_name: "Isaks sänglampa"
+  homebridge_visible: true
 
 light.bedroom_erikabedside_level:
   friendly_name: "Erikas sänglampa"
+  homebridge_visible: true
 
 # Köket
 switch.kitchen_window_switch:
@@ -48,6 +50,9 @@ switch.kitchen_coffeebrewer_switch:
 ####################################################
 media_player.vardagsrum:
   friendly_name: Soundbar
+
+media_player.apple_tv:
+  friendly_name: "Apple TV"
 
 ####################################################
 #                                                  #
@@ -78,6 +83,7 @@ sensor.kitchen_window_power:
 
 sensor.kitchen_coffeebrewer_power:
   friendly_name: "Kök: Kaffebryggare"
+  icon: mdi:flash
 
 sensor.ram_used:
   friendly_name: "Användning av RAM-minne"
@@ -89,7 +95,7 @@ sensor.disk_used_:
   friendly_name: "Användning av hårddisk"
 
 sensor.since_last_boot:
-  friendly_name: "System uptime"
+  friendly_name: "Tid sedan systemstart"
 
 ####################################################
 #                                                  #
@@ -97,72 +103,25 @@ sensor.since_last_boot:
 #                                                  #
 ####################################################
 sensor.dark_sky_cloud_coverage:
-  friendly_name: Molnighet
+  friendly_name: Moln
   icon: mdi:cloud
 
-sensor.dark_sky_humidity:
-  friendly_name: Luftfuktighet
-  icon: mdi:water-percent
-
 sensor.dark_sky_precip_intensity:
-  friendly_name: Nederbörd
+  friendly_name: Regn
   icon: mdi:weather-rainy
 
 sensor.dark_sky_temperature:
-  friendly_name: Temperatur
+  friendly_name: Temp
   icon: mdi:thermometer
-
-sensor.dark_sky_daily_high_temperature:
-  friendly_name: "Idag blir det som varmast"
-
-sensor.dark_sky_uv_index:
-  friendly_name: "UV Index"
 
 sensor.dark_sky_wind_speed:
   friendly_name: Vind
   icon: mdi:weather-windy
 
-sun.sun:
-  friendly_name: "Solen"
-
-sensor.moonstages:
-  icon: mdi:weather-night
-
-sensor.precip_types:
-  icon: mdi:weather-rainy
-
 ####################################################
 #                                                  #
-#                 AUTOMATIONS                      #
+#                  INPUT SELECT                    #
 #                                                  #
 ####################################################
-
-####################################################
-#                                                  #
-#                   SCRIPTS                        #
-#                                                  #
-####################################################
-script.morning:
-  entity_picture: /local/coffee.png
-
-script.evening:
-  entity_picture: /local/sunset.png
-
-script.bedtime:
-  entity_picture: /local/bed.png
-
-script.night:
-  entity_picture: /local/sleeping-face.png
-
-####################################################
-#                                                  #
-#             HOME ASSISTANT GROUPS                #
-#                                                  #
-####################################################
-group.all_automations:
-  friendly_name: "Automationer"
-  hidden: false
-
-group.all_devices:
-  friendly_name: "Hushåll"
-  hidden: false
+input_select.scenepicker:
+  friendly_name: "Scen"

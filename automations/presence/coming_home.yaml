@@ -1,5 +1,5 @@
 # Run evening script when someone comes home after sunset
-alias: "Kör kvällsläge vid hemkomst efter solnedgången"
+alias: "Kör Hemmaläge vid hemkomst efter solnedgången"
 trigger:
   platform: state
   entity_id: group.all_devices
@@ -13,7 +13,9 @@ condition:
       state: 'below_horizon'
 
 action:
-  - service: script.turn_on
-    entity_id: script.evening
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.scenepicker
+      option: "Hemma"
   - service: script.turn_on
     entity_id: script.logger_coming_home

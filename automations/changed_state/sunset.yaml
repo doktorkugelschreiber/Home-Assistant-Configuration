@@ -1,5 +1,5 @@
 # Run evening script at sunset if someone is home
-alias: "Gå till kvällsläge vid solnedgången"
+alias: "Kör hemmaläge vid solnedgången"
 trigger:
   platform: sun
   event: sunset
@@ -13,7 +13,10 @@ condition:
       state: 'home'
 
 action:
-  - service: script.turn_on
-    entity_id: script.evening
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.scenepicker
+      option: "Hemma"
+
   - service: script.turn_on
     entity_id: script.logger_sunset

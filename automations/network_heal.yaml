@@ -1,8 +1,0 @@
-# Heal Z-Wave Network every day at 03:00
-alias: "Kör nätverksverktyg kl. 03:00"
-trigger:
-  platform: time
-  at: '03:00:00'
-
-action:
-  - zwave.heal_network

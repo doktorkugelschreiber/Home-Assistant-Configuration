@@ -8,13 +8,18 @@ homeassistant:
   customize: !include customize.yaml
 
 frontend:
+# Include themes
+  themes: !include_dir_named themes/
 
 config:
 updater:
 map:
-sun:
+
+# Enable iOS Component
 ios:
 conversation:
+
+# Enable text-to-speech in Swedish language
 tts:
   - platform: google
     language: sv
@@ -31,7 +36,13 @@ discovery:
 
 zwave:
   usb_path: /dev/ttyACM0
+  device_config: !include zwave_device_config.yaml
 
+# This shell command can be triggered from the service call component to disable the Z-Sticks flashing disco lights
+shell_command:
+  disco_off: echo -e -n "\x01\x08\x00\xF2\x51\x01\x00\x05\x01\x51" > /dev/ttyACM0
+
+# Track devices from router connections
 device_tracker:
  - platform: asuswrt
    host: !secret router_ip
@@ -41,6 +52,9 @@ device_tracker:
    track_new_devices: true
    consider_home: 180
    interval_seconds: 12
+
+# Track the sun
+sun:
 
 history:
   include:
@@ -71,6 +85,8 @@ logbook:
       - sensor
       - zwave
 
+# Inclusions
+input_select: !include_dir_named input_select/
 sensor: !include sensors.yaml
 group: !include groups.yaml
 automation: !include_dir_list automations/
