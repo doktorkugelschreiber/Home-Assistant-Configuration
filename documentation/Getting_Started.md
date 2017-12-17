@@ -27,3 +27,7 @@ In the sidebar click "Hass.io" and on the top bar press the shopping bag. Click 
 If you're using a Mac computer, open finder. Hit `cmd+K` and connect to `smb://hassio.local`. You will be asked which folder you want to open. Choose `config`.
 
 You now have access to your configuration. In order to edit the `.yaml` files I recommend using a dedicated editor. I use [Atom](www.atom.io)
+
+## Further Reading
+- [Installing Home Assistant](https://home-assistant.io/getting-started/)
+- [Configure Home Assistant](https://home-assistant.io/getting-started/configuration/)

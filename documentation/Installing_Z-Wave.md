@@ -16,7 +16,7 @@ zwave:
 
 When Home Assistant has restarted, you should have a settings panel called `Z-Wave` when you click `Configuration` in the side bar.
 
-## Disable the disco lights
+## Disable the disco lights (optional)
 Your Z-Stick's LED is probably blinking in different colors. If you find that annoying, there is a way to disable it.
 1. Open your `configuration.yaml`.
 2. Somewhere along the lines, add the following code:
@@ -30,3 +30,13 @@ shell_command:
 6. In the `Service` entry, enter `shell_command.disco_off`.
 7. Click `CALL SERVICE`.
 8. Disco lights should now be off.
+
+## Adding your first device
+A Z-Wave device is called a node. Each node has different pairing commands. Refer to your device manual to find the pairing command for your device. For instance, to add a Fibaro Wall Plug, triple-click the button on the side of the plug.
+
+1. Go to your `Z-Wave` page under `Configuration` in the sidebar.
+2. Click `Add Node`
+3. Run the pair command on your Z-Wave device
+4. Your device should now be added. You can see it if you click the drop-down list called `Nodes`.
+5. At this point it will not have a name, and if you do not name it, it will be named according to the manufacturer's name. Click the node in the drop-down list. Enter the new name and click `RENAME NODE`. A tip is to think carefully before you name it. If you want to rename it later on, it will require a bit of extra work.
+6. Restart Home Assistant. Your Node will now show.
