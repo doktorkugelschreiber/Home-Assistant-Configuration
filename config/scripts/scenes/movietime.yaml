@@ -17,8 +17,8 @@ sequence:
       brightness: 50
 
   - service_template: >
-      {%- if is_state('switch.livingroom_window_switch', 'off') -%}
-        switch.turn_on
+      {%- if is_state('switch.livingroom_window_switch', 'on') -%}
+        switch.turn_off
       {%- else -%}
       {%- endif %}
     entity_id: switch.livingroom_window_switch

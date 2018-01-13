@@ -1,43 +1,105 @@
-# Timer to turn off coffee brewer if it is still on after 40 minutes
+# Timer to turn off coffee brewer if it is still on after 1 hour
 
-# When coffee brewer is started, trigger a countdown
+# Actionable notifications
+ios:
+  categories:
+    - name: CoffeeTimer
+      identifier: 'coffeetimer'
+      actions:
+        - identifier: 'COFFEE_20_MINUTES'
+          title: '20 minuter till'
+          activationMode: 'background'
+          authenticationRequired: no
+          destructive: no
+          behavior: 'default'
+      actions:
+        - identifier: 'COFFEE_TURNOFF'
+          title: 'Stäng av'
+          activationMode: 'background'
+          authenticationRequired: no
+          destructive: yes
+          behavior: 'default'
+
 automation:
-  alias: "Kaffebryggare av efter 40 minuter"
-  trigger:
-    platform: state
-    entity_id: switch.kitchen_coffeebrewer_switch
-    to: 'on'
+# When coffee brewer is started, trigger the countdown
+  - alias: "Kaffebryggare av efter 60 minuter"
 
-  action:
-    - service: script.turn_on
-      entity_id: script.coffeecountdown
+    trigger:
+      platform: state
+      entity_id: switch.kitchen_coffeebrewer_switch
+      to: 'on'
+
+    action:
+      - service: script.turn_on
+        entity_id: script.coffeecountdown
+
+# If coffee brewer is manually turned off before countdown ended, stop the countdown
+  - alias: "Stop Coffeecountdown"
+    hide_entity: true
+
+    trigger:
+      platform: state
+      entity_id: switch.kitchen_coffeebrewer_switch
+      to: 'off'
+
+    action:
+      - service: script.turn_off
+        entity_id: script.coffeecountdown
+
+# If iOS User chooses 20 more minutes, run script coffee20minutes
+  - alias: "Coffee20minutes"
+    hide_entity: true
+
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: COFFEE_20_MINUTES
+
+    action:
+      - service: script.turn_on
+        entity_id: script.coffee20minutes
 
 # Countdown
 script:
   coffeecountdown:
     sequence:
-      - delay: 00:40:00
+      - delay: 00:00:05
 
-# If brewer is still on, trigger "turn off" script.
-      - service_template: >
-          {%- if is_state('switch.kitchen_coffeebrewer_switch', 'on') -%}
-            script.turn_on
-          {%- else -%}
-          {%- endif %}
-        entity_id: script.turnoffcoffeebrewer
+      # Notify iOS
+      - service: notify.ios_isaksiphone
+        data:
+          title: "Timer"
+          message: "Kaffebryggaren har varit på en timme. Vill du stänga av den?"
+          data:
+            push:
+              badge: 1
+              category: 'coffeetimer'
 
-# "Turn off" script
-  turnoffcoffeebrewer:
+  coffee20minutes:
     sequence:
+      - delay: 00:00:05
+
+      # Notify iOS
+      - service: notify.ios_isaksiphone
+        data:
+          title: "Timer"
+          message: "Kaffebryggaren har varit på i 20 minuter till. Vill du stänga av den?"
+          data:
+            push:
+              badge: 1
+              category: 'coffeetimer'
+
+
       - service: switch.turn_off
         entity_id: switch.kitchen_coffeebrewer_switch
 
       - service: notify.ios_isaksiphone
         data:
           title: "Timer"
-          message: "Kaffebryggaren stängdes av efter 40 minuter."
+          message: "Kaffebryggaren stängdes av efter 1 timme."
 
       - service: notify.ios_erikasiphone
         data:
           title: "Timer"
-          message: "Kaffebryggaren stängdes av efter 40 minuter."
+          message: "Kaffebryggaren stängdes av efter 1 timme."

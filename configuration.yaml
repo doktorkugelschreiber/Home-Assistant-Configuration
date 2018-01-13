@@ -11,7 +11,7 @@ homeassistant:
   time_zone: Europe/Stockholm
   customize: !include config/customize.yaml
 
-  # https://home-assistant.io/docs/configuration/packages/
+# https://home-assistant.io/docs/configuration/packages/
   packages: !include_dir_named config/packages/
 
 # https://github.com/andrey-git/home-assistant-customizer
@@ -21,6 +21,11 @@ customizer:
 # https://home-assistant.io/components/frontend/
 frontend:
   themes: !include_dir_named config/themes/
+  javascript_version: es5
+  extra_html_url:
+    - /local/custom_ui/state-card-tiles.html
+  extra_html_url_es5:
+    - /local/custom_ui/state-card-tiles.html
 
 # https://home-assistant.io/docs/ecosystem/ios/
 ios:

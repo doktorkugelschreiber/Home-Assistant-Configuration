@@ -1,7 +1,38 @@
-# The objective of this package is to create a scene picker in frontend.
-# If user picks a scene, that scene should be performed.
-# Other automations performing scenes should also go through scene picker so that frontend always shows the correct scene.
+##############################################################################
+## OBJECTIVE
+##############################################################################
+## The objective of this package is to create a scene picker in frontend.
+## If user picks a scene, that scene should be performed.
+##
+## Please note: If you use other automations to perform scenes, they should also go through the scene picker.
+## By doing so, frontend always shows the correct scene.
+##
+## Example automation using device presence and sun state to perform a scene:
+#### trigger:
+####  platform: state
+####  entity_id: group.all_devices
+####  to: 'home'
+####
+#### condition:
+####  condition: and
+####  conditions:
+####    - condition: state
+####      entity_id: sun.sun
+####      state: 'below_horizon'
+####
+#### action:
+####  - service: input_select.select_option
+####    data:
+####      entity_id: input_select.scenepicker
+####      option: "Hemma"
+##
+## I prefer using script: rather than scene: since it is more versatile.
+## Whenever I refer to scenes, that means I refer to a script that calls services such as
+## light.turn_on or switch_turn.on
 
+##############################################################################
+## INPUT SELECT
+##############################################################################
 # Define dropdown list to pick scenes from
 input_select:
   scenepicker:
@@ -14,6 +45,9 @@ input_select:
       - "Läggdags"
       - "Sova"
 
+##############################################################################
+## AUTOMATIONS
+##############################################################################
 # Perform actions based on which scene is picked.
 automation:
   alias: "Kör scen"
@@ -42,3 +76,12 @@ automation:
           {% else %}
             none
           {% endif %}
+
+##############################################################################
+## GROUPS
+##############################################################################
+group:
+  scenepicker:
+    name: "Välj scen"
+    entities:
+      - input_select.scenepicker

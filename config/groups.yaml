@@ -12,7 +12,7 @@
       - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_precip_intensity
       - sensor.dark_sky_wind_speed
-      - group.inputselect
+      - group.scenepicker
       - group.hall
       - group.vardagsrum
       - group.kitchen
@@ -25,7 +25,9 @@
     view: yes
     entities:
       - media_player.vardagsrum
+      - media_player.sovrum
       - media_player.apple_tv
+      - group.atvremote
 
 # What to view on sensors page
   sensors:
@@ -52,11 +54,6 @@
 #         Groups within groups       #
 ######################################
 # Groups within front page
-  inputselect:
-    name: "Välj scen"
-    entities:
-      - input_select.scenepicker
-
   hall:
     name: Hall
     entities:

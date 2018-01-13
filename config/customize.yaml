@@ -58,7 +58,7 @@ switch.kitchen_coffeebrewer_switch:
 #                                                  #
 ####################################################
 media_player.vardagsrum:
-  friendly_name: Soundbar
+  friendly_name: Vardagsrum
 
 media_player.apple_tv:
   friendly_name: "Apple TV"

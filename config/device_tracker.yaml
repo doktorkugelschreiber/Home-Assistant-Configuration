@@ -3,6 +3,6 @@
   username: !secret router_username
   password: !secret router_password
   protocol: telnet
-  track_new_devices: true
+  track_new_devices: false
   consider_home: 180
   interval_seconds: 12
