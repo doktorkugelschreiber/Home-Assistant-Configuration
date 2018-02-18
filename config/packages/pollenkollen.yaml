@@ -16,7 +16,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Al'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "L-M" %}
@@ -37,7 +37,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Alm'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "L-M" %}
@@ -58,7 +58,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Björk'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "L-M" %}
@@ -79,7 +79,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Bok'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "L-M" %}
@@ -100,7 +100,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Ek'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "L-M" %}
@@ -121,7 +121,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "L-M" %}
@@ -142,7 +142,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "L-M" %}
@@ -163,7 +163,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "L-M" %}
@@ -184,7 +184,7 @@ sensor:
           {% if states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "i.u." %}
             /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "i.h." %}
-            /local/pollenstatus_ih-l.png
+            /local/pollenstatus_iu.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "L" %}
             /local/pollenstatus_ih-l.png
           {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "L-M" %}
