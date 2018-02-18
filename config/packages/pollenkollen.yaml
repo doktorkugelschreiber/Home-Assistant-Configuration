@@ -1,7 +1,7 @@
 # Package for pollen sensor.
 # Requirements: pollenkoll.py (see config/custom_components/sensor/pollenkoll.py) as made by https://github.com/JohNan/home-assistant-pollenkoll
 sensor:
-# Initial HA Sensor to fetch pollen data from pollenkoll.se. What you put in state doesn't matter (as long as you put a pollen type there, as we will interpret data later on)
+# Initial HA Sensor to fetch pollen data from pollenkoll.se.
   - platform: pollenkoll
     sensors:
       - city: Stockholm
