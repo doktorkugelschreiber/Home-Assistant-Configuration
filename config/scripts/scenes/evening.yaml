@@ -22,7 +22,6 @@ sequence:
   - service_template: >
       {%- if is_state('light.bedroom_isakbedside_level', 'on') -%}
         light.turn_on
-      {%- else -%}
       {%- endif %}
     entity_id: light.bedroom_isakbedside_level
     data:
@@ -31,13 +30,12 @@ sequence:
   - service_template: >
       {%- if is_state('light.bedroom_erikabedside_level', 'on') -%}
         light.turn_on
-      {%- else -%}
       {%- endif %}
     entity_id: light.bedroom_erikabedside_level
     data:
       brightness: 150
 
-  - service: logbook.log
-    data_template:
-      name: Kvällsläge
-      message: aktiverades
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.scenepicker
+      option: "--Välj--"

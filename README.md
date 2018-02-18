@@ -11,16 +11,14 @@ This is a copy of my Home Assistant Configuration. The configuration is a work i
 * 1 x CAT-6 Cable
 
 **Z-Wave Devices**
-* 5 x Fibaro Wall Plug
+* 6 x Fibaro Wall Plug
 * 3 x NEXA AD-147 Dimmable Wall Plug
+* 1 x Fibaro Dimmer 2
 
 **Other smart devices**
 * 1 x SONOS Playbar
+* 1 x SONOS One
 * 1 x Apple TV (gen. 3)
-
-# Guides
-1. [Getting Started](https://github.com/doktorkugelschreiber/Home-Assistant-Configuration/blob/master/documentation/Getting_Started.md)
-2. [Installing Z-Wave](https://github.com/doktorkugelschreiber/Home-Assistant-Configuration/blob/master/documentation/Installing_Z-Wave.md)
 
 ## Components
 **Automations**
@@ -29,7 +27,7 @@ This is a copy of my Home Assistant Configuration. The configuration is a work i
 **Timers**
 
 **Custom UI**
-* [State cards](https://github.com/andrey-git/home-assistant-custom-ui) used to add sliders for dimmable lights.
+* [Custom UI](https://github.com/andrey-git/home-assistant-custom-ui) used to add sliders for dimmable lights.
 
 **Custom Themes**
 * [Midnight theme](https://community.home-assistant.io/t/midnight-theme/28598)

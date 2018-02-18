@@ -22,6 +22,11 @@ light.livingroom_cornerlight_level:
   state_card_mode: break-slider
   stretch_slider: true
 
+switch.samsung_tv:
+  icon: mdi:television
+  homebridge_visible: true
+  homebridge_switch_type: outlet
+
 # Sovrummet
 switch.bedroom_window_switch:
   friendly_name: Fönster
@@ -48,9 +53,24 @@ switch.kitchen_window_switch:
   icon: mdi:lightbulb
   homebridge_visible: true
 
+switch.kitchen_tolomeo_switch:
+  friendly_name: Tolomeo
+  icon: mdi:lightbulb
+  homebridge_visible: true
+
+light.kitchen_spotlight_level:
+  friendly_name: "Spotlight"
+  homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  state_card_mode: break-slider
+  stretch_slider: true
+
 switch.kitchen_coffeebrewer_switch:
   friendly_name: Kaffebryggare
   homebridge_visible: true
+  homebridge_switch_type: outlet
+  custom_ui_state_card: state-card-custom-ui
+  show_last_changed: true
 
 ####################################################
 #                                                  #
@@ -90,21 +110,29 @@ sensor.kitchen_window_power:
   icon: mdi:lightbulb
   friendly_name: "Kök: Fönster"
 
+sensor.kitchen_tolomeo_power:
+  icon: mdi:lightbulb
+  friendly_name: "Kök: Tolomeo"
+
+sensor.kitchen_spotlight_power:
+  icon: mdi:lightbulb
+  friendly_name: "Kök: Spotlight"
+
 sensor.kitchen_coffeebrewer_power:
   friendly_name: "Kök: Kaffebryggare"
   icon: mdi:flash
 
-sensor.ram_used:
-  friendly_name: "Användning av RAM-minne"
+sensor.memory_use_percent:
+  friendly_name: "RAM"
 
-sensor.cpu_used:
-  friendly_name: "Användning av processor"
+sensor.processor_use:
+  friendly_name: "CPU"
 
-sensor.disk_used_:
-  friendly_name: "Användning av hårddisk"
+sensor.disk_use_percent_:
+  friendly_name: "HDD"
 
 sensor.since_last_boot:
-  friendly_name: "Tid sedan systemstart"
+  friendly_name: "Uptime"
 
 ####################################################
 #                                                  #

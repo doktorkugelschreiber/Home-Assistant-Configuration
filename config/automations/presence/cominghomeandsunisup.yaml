@@ -1,0 +1,14 @@
+alias: "Erika väljer om lampan ska tändas"
+hide_entity: true
+
+trigger:
+  platform: event
+  event_type: ios.notification_action_fired
+  event_data:
+    actionName: COMINGHOMEANDSUNISUP_YES
+
+action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.scenepicker
+      option: "Hemma"

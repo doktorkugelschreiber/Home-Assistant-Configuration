@@ -1,0 +1,271 @@
+# Please see https://community.home-assistant.io/t/creating-an-alarm-clock-updated/15195
+
+# # # # # # # # # # #
+#   INPUT_NUMBER    #
+# # # # # # # # # # #
+
+# Slider to set hour and minute
+input_number:
+  alarm_hour:
+    name: Timme
+    icon: mdi:timer
+    initial: 6
+    min: 0
+    max: 23
+    step: 1
+  alarm_minute:
+    name: Minut
+    icon: mdi:timer
+    initial: 30
+    min: 0
+    max: 59
+    step: 5
+
+
+# # # # # # # # # # #
+#  INPUT_BOOLEAN    #
+# # # # # # # # # # #
+
+# Switch to turn the alarm on or off
+input_boolean:
+  alarm_activated:
+    name: "På/Av"
+    icon: mdi:timer
+    initial: off
+
+
+# # # # # # # # # # #
+#   INPUT_SELECT    #
+# # # # # # # # # # #
+
+# Choose who gets notification
+input_select:
+  alarm_whotonotify:
+    name: "Vem går upp först?"
+    icon: mdi:account
+    options:
+      - Isak
+      - Erika
+
+
+# # # # # # # # # # #
+#      SENSOR       #
+# # # # # # # # # # #
+sensor:
+  - platform: template
+    sensors:
+# Template sensor to show which time the alarm is set for
+      alarm_time:
+        friendly_name: "Tid"
+        icon_template: mdi:alarm
+        value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.alarm_hour") | int, states("input_number.alarm_minute") | int) }}'
+# Template sensor to show state as a badge in frontend
+      alarm_activated_badge:
+        friendly_name: "Alarm"
+        value_template: >
+          {% if is_state("input_boolean.alarm_activated", "on") %}
+            {{states.sensor.alarm_time.state}}
+          {% else %}
+            Av
+          {% endif %}
+# # # # # # # # # # #
+#       GROUP       #
+# # # # # # # # # # #
+
+# Group entites above into a single card
+group:
+  alarmclock:
+    name: "Väckarklocka"
+    entities:
+      - input_boolean.alarm_activated
+      - sensor.alarm_time
+      - input_number.alarm_hour
+      - input_number.alarm_minute
+      - input_select.alarm_whotonotify
+
+
+# # # # # # # # # # #
+#     AUTOMATIONS   #
+# # # # # # # # # # #
+
+automation:
+
+# Automation to start the alarm
+  - alias: "Ring the alarm"
+    hide_entity: true
+
+    trigger:
+      platform: time
+      minutes: '/1'
+      seconds: 0
+
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.alarm_activated
+          state: 'on'
+        - condition: template
+          value_template: '{{ now().strftime("%H:%M") == states.sensor.alarm_time.state }}'
+
+    action:
+      - service_template: >
+          {% if is_state("input_select.alarm_whotonotify", "Erika") %}
+            notify.ios_erikasiphone
+          {% else %}
+            notify.ios_isaksiphone
+          {% endif %}
+        data:
+          title: "Väckarklocka"
+          message: "Dags att gå upp. Vill du starta morgonscenen?"
+          data:
+            push:
+              category:
+                'alarmclock'
+
+# Automation - if iOS user awake, start morning scene, disable alarm
+  - alias: "Alarm user awake now"
+    hide_entity: true
+
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: ALARM_AWAKE
+
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.scenepicker
+          option: "Morgon"
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.alarm_activated
+      - service: media_player.media_pause
+        entity_id: media_player.sovrum
+
+# Automation - if iOS user awake but chooses to delay, disable alarm and delay
+  - alias: "Alarm user awake but showering"
+    hide_entity: true
+
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: ALARM_AWAKE_SHOWER_FIRST
+
+    action:
+      - service: media_player.media_pause
+        entity_id: media_player.sovrum
+      - delay: 00:20:00
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.scenepicker
+          option: "Morgon"
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.alarm_activated
+
+# Automation - if iOS user chooses not to runt automations then simply turn off the alarm
+  - alias: "Alarm user dont run automations"
+    hide_entity: true
+
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: ALARM_NOT_AWAKE
+
+    action:
+      - service: media_player.media_pause
+        entity_id: media_player.sovrum
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.alarm_activated
+
+# Automation - to be written - if iOS users turns off alarm but no motion is detected or no new alarm is set, then do something (to be thought out)
+
+# Automation - if alarm is turned on in HA, update Sonos alarm
+  - alias: "Set Sonos Alarm"
+    hide_entity: true
+
+    trigger:
+      - platform: state
+        entity_id: input_boolean.alarm_activated
+        to: 'on'
+
+    action:
+      service: media_player.sonos_update_alarm
+      data_template:
+        entity_id: media_player.sovrum
+        alarm_id: 1
+        time: '{{ states.sensor.alarm_time.state }}'
+        enabled: true
+
+# Automation - if alarm is turned off in HA, update Sonos alarm
+  - alias: "Disable Sonos Alarm"
+    hide_entity: true
+
+    trigger:
+      - platform: state
+        entity_id: input_boolean.alarm_activated
+        to: 'off'
+
+    action:
+      service: media_player.sonos_update_alarm
+      data_template:
+        entity_id: media_player.sovrum
+        alarm_id: 1
+        enabled: false
+
+# Automation - if alarm hour is changed, update the alarm
+  - alias: "Update Sonos Alarm Hour"
+    hide_entity: true
+
+    trigger:
+      - platform: state
+        entity_id: input_number.alarm_hour
+
+    action:
+      service: media_player.sonos_update_alarm
+      data_template:
+        entity_id: media_player.sovrum
+        alarm_id: 1
+        time: '{{ states.sensor.alarm_time.state }}'
+
+# Automation - if alarm minute is changed, update the alarm
+  - alias: "Update Sonos Alarm Minute"
+    hide_entity: true
+
+    trigger:
+      - platform: state
+        entity_id: input_number.alarm_minute
+
+    action:
+      service: media_player.sonos_update_alarm
+      data_template:
+        entity_id: media_player.sovrum
+        alarm_id: 1
+        time: '{{ states.sensor.alarm_time.state }}'
+
+# Automation - reminder to set the alarm
+  - alias: "Reminder to set the alarm"
+    hide_entity: true
+
+    trigger:
+      - platform: state
+        entity_id: input_select.scenepicker
+        to: "Sova"
+
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.alarm_activated
+          state: 'off'
+        - condition: state
+          entity_id: device_tracker.isaksiphone
+          state: 'home'
+
+    action:
+      - service: notify.ios_isaksiphone
+        data:
+          title: "Läggdags"
+          message: "Har du kommit ihåg att slå på väckarklockan?"

@@ -1,18 +1,30 @@
-# Notify iOS if switch is on but no one is home
-alias: "Skicka notis om eluttag är på men ingen är hemma"
+# Automatically turn everything off
+alias: "Automatisk avstängning när vi går hemifrån"
 trigger:
   platform: state
   entity_id: group.all_devices
   from: 'home'
 
 condition:
-  condition: and
+  condition: or
   conditions:
     - condition: state
       entity_id: group.all_switches
       state: 'on'
+    - condition: state
+      entity_id: group.all_lights
+      state: 'on'
 
 action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.scenepicker
+      option: "Borta"
+
   - service: notify.ios_isaksiphone
     data:
-      message: "Det verkar som att ingen är hemma men något eluttag är fortfarande på."
+      message: "Du glömde släcka innan du gick. Jag har gjort det åt dig."
+
+  - service: notify.ios_erikasiphone
+    data:
+      message: "Du glömde släcka innan du gick. Jag har gjort det åt dig."

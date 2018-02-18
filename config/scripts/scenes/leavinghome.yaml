@@ -3,28 +3,24 @@ sequence:
   - service_template: >
       {%- if is_state('switch.kitchen_window_switch', 'on') -%}
         switch.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: switch.kitchen_window_switch
 
   - service_template: >
       {%- if is_state('switch.livingroom_window_switch', 'on') -%}
         switch.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: switch.livingroom_window_switch
 
   - service_template: >
       {%- if is_state('light.livingroom_cornerlight_level', 'on') -%}
         light.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: light.livingroom_cornerlight_level
 
   - service_template: >
       {%- if is_state('switch.kitchen_coffeebrewer_switch', 'on') -%}
         switch.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: switch.kitchen_coffeebrewer_switch
 
@@ -33,31 +29,40 @@ sequence:
   - service_template: >
       {%- if is_state('switch.bedroom_window_switch', 'on') -%}
         switch.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: switch.bedroom_window_switch
 
   - service_template: >
       {%- if is_state('light.bedroom_erikabedside_level', 'on') -%}
         light.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: light.bedroom_erikabedside_level
 
   - service_template: >
       {%- if is_state('light.bedroom_isakbedside_level', 'on') -%}
         light.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: light.bedroom_isakbedside_level
 
   - service_template: >
       {%- if is_state('switch.hall_spegel_switch', 'on') -%}
         switch.turn_off
-      {%- else -%}
       {%- endif %}
     entity_id: switch.hall_spegel_switch
 
-  - service: logbook.log
-    data_template:
-      message: Vi gick hemifrån.
+  - service_template: >
+      {%- if is_state('light.kitchen_spotlight_level', 'on') -%}
+        light.turn_off
+      {%- endif %}
+    entity_id: light.kitchen_spotlight_level
+
+  - service_template: >
+      {%- if is_state('switch.kitchen_tolomeo_switch', 'on') -%}
+        switch.turn_off
+      {%- endif %}
+    entity_id: switch.kitchen_tolomeo_switch
+
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.scenepicker
+      option: "--Välj--"

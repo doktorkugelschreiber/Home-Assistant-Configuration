@@ -1,18 +1,19 @@
+use_include_order: true
 include:
   entities:
     - device_tracker.erikasiphone
     - device_tracker.isaksiphone
+    - switch.samsung_tv
     - media_player.vardagsrum
-    - media_player.apple_tv
-    - sensor.dark_sky_cloud_coverage
-    - sensor.dark_sky_humidity
-    - sensor.dark_sky_temperature
-    - sensor.dark_sky_precip_intensity
-    - sensor.dark_sky_wind_speed
-    - sensor.hall_light_spegel_power
-    - sensor.isaks_iphone_battery_level
-    - sensor.isaks_iphone_battery_state
-    - sensor.erikas_iphone_battery_level
-    - sensor.erikas_iphone_battery_state
+    - media_player.sovrum
     - sun.sun
-    - switch.hall_light_spegel_switch
+    - switch.hall_spegel_switch
+    - switch.kitchen_window_switch
+    - switch.kitchen_coffeebrewer_switch
+    - switch.kitchen_tolomeo_switch
+    - light.kitchen_spotlight_level
+    - switch.livingroom_window_switch
+    - light.livingroom_cornerlight_level
+    - switch.bedroom_window_switch
+    - light.bedroom_erikabedside_level
+    - light.bedroom_isakbedside_level

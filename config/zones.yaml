@@ -1,22 +1,16 @@
-- name: på jobbet
-  latitude: !secret work_latitude
-  longitude: !secret work_longitude
-  radius: 500
-  icon: mdi:briefcase
-
-- name: på gymmet
+- name: SATS
   latitude: !secret gym_latitude
   longitude: !secret gym_longitude
-  radius: 200
+  radius: 100
   icon: mdi:weight-kilogram
 
-- name: på ICA
-  latitude: !secret shop_latitude
-  longitude: !secret shop_longitude
-  icon: mdi:cart
-
-- name: på universitetet
+- name: Universitetet
   latitude: !secret university_latitude
   longitude: !secret university_longitude
   icon: mdi:school
   radius: 300
+
+- name: "Läskiga backen"
+  latitude: !secret laskigabacken_latitude
+  longitude: !secret laskigabacken_longitude
+  radius: 50

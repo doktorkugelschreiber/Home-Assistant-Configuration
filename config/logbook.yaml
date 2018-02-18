@@ -5,3 +5,10 @@ exclude:
     - media_player
     - sensor
     - zwave
+    - binary_sensor
+    - input_select
+  entities:
+    - switch.hdmi_0
+    - switch.hdmi_4
+    - script.coffeecountdown
+    - script.coffee20minutes

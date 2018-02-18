@@ -1,2 +1,110 @@
 usb_path: /dev/ttyACM0
-device_config: !include zwave_device_config.yaml
+device_config:
+  sensor.hall_spegel_alarm_level:
+    ignored: true
+  sensor.hall_spegel_alarm_type:
+    ignored: true
+  sensor.hall_spegel_exporting:
+    ignored: true
+  sensor.hall_spegel_power_management:
+    ignored: true
+  sensor.hall_spegel_sourcenodeid:
+    ignored: true
+  sensor.bedroom_erikabedside_alarm_level:
+    ignored: true
+  sensor.bedroom_erikabedside_alarm_type:
+    ignored: true
+  sensor.bedroom_erikabedside_power_management:
+    ignored: true
+  sensor.bedroom_erikabedside_sourcenodeid:
+    ignored: true
+  sensor.bedroom_isakbedside_alarm_level:
+    ignored: true
+  sensor.bedroom_isakbedside_alarm_type:
+    ignored: true
+  sensor.bedroom_isakbedside_power_management:
+    ignored: true
+  sensor.bedroom_isakbedside_sourcenodeid:
+    ignored: true
+  sensor.bedroom_window_alarm_level:
+    ignored: true
+  sensor.bedroom_window_alarm_type:
+    ignored: true
+  sensor.bedroom_window_exporting:
+    ignored: true
+  sensor.bedroom_window_power_2:
+    ignored: true
+  sensor.bedroom_window_power_management:
+    ignored: true
+  sensor.bedroom_window_sourcenodeid:
+    ignored: true
+  sensor.kitchen_coffeebrewer_alarm_level:
+    ignored: true
+  sensor.kitchen_coffeebrewer_alarm_type:
+    ignored: true
+  sensor.kitchen_coffeebrewer_exporting:
+    ignored: true
+  sensor.kitchen_coffeebrewer_power_2:
+    ignored: true
+  sensor.kitchen_coffeebrewer_power_management:
+    ignored: true
+  sensor.kitchen_coffeebrewer_sourcenodeid:
+    ignored: true
+  sensor.kitchen_spotlight_alarm_level:
+    ignored: true
+  sensor.kitchen_spotlight_alarm_level_2:
+    ignored: true
+  sensor.kitchen_spotlight_alarm_type:
+    ignored: true
+  sensor.kitchen_spotlight_alarm_type_2:
+    ignored: true
+  sensor.kitchen_spotlight_exporting:
+    ignored: true
+  sensor.kitchen_spotlight_heat:
+    ignored: true
+  sensor.kitchen_spotlight_power_management:
+    ignored: true
+  sensor.kitchen_spotlight_sourcenodeid:
+    ignored: true
+  sensor.kitchen_spotlight_system:
+    ignored: true
+  sensor.kitchen_spotlight_unknown:
+    ignored: true
+  sensor.kitchen_tolomeo_alarm_level:
+    ignored: true
+  sensor.kitchen_tolomeo_alarm_type:
+    ignored: true
+  sensor.kitchen_tolomeo_exporting:
+    ignored: true
+  sensor.kitchen_tolomeo_power_management:
+    ignored: true
+  sensor.kitchen_tolomeo_sourcenodeid:
+    ignored: true
+  sensor.kitchen_window_alarm_level:
+    ignored: true
+  sensor.kitchen_window_alarm_type:
+    ignored: true
+  sensor.kitchen_window_exporting:
+    ignored: true
+  sensor.kitchen_window_power_management:
+    ignored: true
+  sensor.kitchen_window_sourcenodeid:
+    ignored: true
+  sensor.livingroom_cornerlight_alarm_level:
+    ignored: true
+  sensor.livingroom_cornerlight_alarm_type:
+    ignored: true
+  sensor.livingroom_cornerlight_power_management:
+    ignored: true
+  sensor.livingroom_cornerlight_sourcenodeid:
+    ignored: true
+  sensor.livingroom_window_alarm_level:
+    ignored: true
+  sensor.livingroom_window_alarm_type:
+    ignored: true
+  sensor.livingroom_window_exporting:
+    ignored: true
+  sensor.livingroom_window_power_management:
+    ignored: true
+  sensor.livingroom_window_sourcenodeid:
+    ignored: true

@@ -6,23 +6,10 @@ trigger:
   to: 'home'
 
 condition:
-  condition: or
+  condition: and
   conditions:
-    - condition: state
-      entity_id: device_tracker.erikasiphone
-      state: 'not_home'
-    - condition: state
-      entity_id: device_tracker.erikasiphone
-      state: 'jobbet'
-    - condition: state
-      entity_id: device_tracker.erikasiphone
-      state: 'gymmet'
-    - condition: state
-      entity_id: device_tracker.erikasiphone
-      state: 'ica'
-    - condition: state
-      entity_id: device_tracker.erikasiphone
-      state: 'universitetet'
+    - condition: template
+      value_template: '{{ states.device_tracker.erikasiphone.state != home }}'
 
 action:
   - service: notify.ios_isaksiphone

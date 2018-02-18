@@ -23,7 +23,22 @@ sequence:
     data:
       brightness: 180
 
-  - service: logbook.log
-    data_template:
-      name: Morgonläge
-      message: aktiverades
+  - service: media_player.volume_set
+    entity_id: media_player.vardagsrum
+    data:
+      volume_level: 0.12
+
+  - delay: 00:00:05
+
+  - service: homeassistant.turn_on
+    entity_id: input_boolean.tv_onoff
+
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.hdmisource
+      option: "Telia TV"
+
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.scenepicker
+      option: "--Välj--"

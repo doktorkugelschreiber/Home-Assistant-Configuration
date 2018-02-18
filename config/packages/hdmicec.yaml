@@ -1,0 +1,74 @@
+# TV Pack
+
+# HDMI Cec
+hdmi_cec:
+  devices:
+    1: Telia TV
+    2: Apple TV
+    3: Playstation 3
+
+# Sensor to track TV state
+binary_sensor:
+  - platform: command_line
+    name: samsung_tv_ping
+    scan_interval: 15
+    command: 'ping -W 1 -c 1 192.168.0.113 > /dev/null 2>&1 && echo success || echo fail'
+    payload_on: success
+    payload_off: fail
+
+# On/off switch
+switch:
+  - platform: template
+    switches:
+      samsung_tv:
+        friendly_name: "TV"
+        value_template: "{{ is_state('binary_sensor.samsung_tv_ping', 'on') }}"
+        turn_on:
+          service: hdmi_cec.power_on
+        turn_off:
+          service: hdmi_cec.standby
+
+# HDMI Input select
+input_select:
+  hdmisource:
+    name: "Välj källa"
+    icon: mdi:video-input-hdmi
+    options:
+      - "--Välj--"
+      - "Telia TV"
+      - "Apple TV"
+      - "Playstation 3"
+
+# Group
+group:
+  tvcontrol:
+    name: "TV"
+    entities:
+      - switch.samsung_tv
+      - input_select.hdmisource
+
+# Automation
+automation:
+  - alias: "Välj HDMI-källa"
+    hide_entity: true
+
+    trigger:
+      platform: state
+      entity_id: input_select.hdmisource
+
+    action:
+      - service: hdmi_cec.select_device
+        data_template:
+          device: >
+            {% if is_state("input_select.hdmisource", "Telia TV") %}
+              Telia TV
+            {% elif is_state("input_select.hdmisource", "Apple TV") %}
+              Apple TV
+            {% elif is_state("input_select.hdmisource", "Playstation 3") %}
+              Playstation 3
+            {% endif %}
+      - delay: 00:00:02
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.hdmisource
+          option: "--Välj--"

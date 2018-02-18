@@ -8,6 +8,7 @@
     entities:
       - device_tracker.erikasiphone
       - device_tracker.isaksiphone
+      - sensor.alarm_activated_badge
       - sensor.dark_sky_temperature
       - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_precip_intensity
@@ -17,6 +18,7 @@
       - group.vardagsrum
       - group.kitchen
       - group.bedroom
+      - group.alarmclock
 
 # What to view on media page
   media:
@@ -24,10 +26,10 @@
     icon: mdi:itunes
     view: yes
     entities:
+      - group.tvcontrol
       - media_player.vardagsrum
       - media_player.sovrum
       - media_player.apple_tv
-      - group.atvremote
 
 # What to view on sensors page
   sensors:
@@ -38,6 +40,7 @@
       - group.batteries
       - group.powerconsumption
       - group.system
+      - group.pollenkoll
 
 # What to view on automations page
   robot:
@@ -64,11 +67,14 @@
     entities:
       - switch.livingroom_window_switch
       - light.livingroom_cornerlight_level
+      - switch.samsung_tv
 
   kitchen:
     name: "Kök"
     entities:
       - switch.kitchen_window_switch
+      - light.kitchen_spotlight_level
+      - switch.kitchen_tolomeo_switch
       - switch.kitchen_coffeebrewer_switch
 
   bedroom:
@@ -86,14 +92,16 @@
       - sensor.livingroom_window_power
       - sensor.bedroom_window_power
       - sensor.kitchen_window_power
+      - sensor.kitchen_tolomeo_power
+      - sensor.kitchen_spotlight_power
       - sensor.kitchen_coffeebrewer_power
 
   system:
     name: "Systemstatus"
     entities:
-      - sensor.ram_used
-      - sensor.cpu_used
-      - sensor.disk_used_
+      - sensor.memory_use_percent
+      - sensor.processor_use
+      - sensor.disk_use_percent_
       - sensor.since_last_boot
 
   batteries:
@@ -106,15 +114,15 @@
   countdowns:
     name: Timers
     entities:
-        - automation.kaffebryggare_av_efter_40_minuter
+        - automation.kaffebryggare_av_efter_60_minuter
 
   automatic_scenes:
     name: Automatiska scenkörningar
     entities:
       - automation.kor_hemmalage_vid_solnedgangen
       - automation.kor_hemmalage_vid_hemkomst_efter_solnedgangen
-      - automation.kor_tvlage_da_apple_tv_spelar_efter_solnedgang
-      - automation.kor_hemmalage_da_apple_tv_pausar_efter_solnedgang
+      - automation.starta_tvlage_da_apple_tv_spelar_efter_solnedgang
+      - automation.starta_timer_da_apple_tv_pausar_efter_solnedgang
 
   notifications:
     name: Notifieringar

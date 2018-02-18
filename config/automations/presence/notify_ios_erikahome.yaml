@@ -6,29 +6,20 @@ trigger:
   to: 'home'
 
 condition:
-  condition: or
+  condition: and
   conditions:
-    - condition: state
-      entity_id: device_tracker.isaksiphone
-      state: 'not_home'
-    - condition: state
-      entity_id: device_tracker.isaksiphone
-      state: 'jobbet'
-    - condition: state
-      entity_id: device_tracker.isaksiphone
-      state: 'gymmet'
-    - condition: state
-      entity_id: device_tracker.isaksiphone
-      state: 'ica'
-    - condition: state
-      entity_id: device_tracker.isaksiphone
-      state: 'universitetet'
+    - condition: template
+      value_template: '{{ states.device_tracker.isaksiphone.state != home }}'
 
 action:
-  - service: notify.ios_erikasiphone
-    data:
-      message: "Välkommen hem Erika."
-
   - service: notify.ios_isaksiphone
     data:
       message: "Erika kom precis hem."
+  - service: notify.ios_erikasiphone
+    data:
+      title: "Hej Erika"
+      message: "Ska jag tända lite?"
+      data:
+        push:
+          category:
+            "cominghomeandsunisup"

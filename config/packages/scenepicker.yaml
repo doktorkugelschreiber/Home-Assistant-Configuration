@@ -36,8 +36,10 @@
 # Define dropdown list to pick scenes from
 input_select:
   scenepicker:
-    name: "Välj scen"
+    name: "Scen"
+    icon: mdi:weather-sunset
     options:
+      - "--Välj--"
       - "Morgon"
       - "Borta"
       - "Hemma"

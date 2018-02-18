@@ -17,18 +17,74 @@ homeassistant:
 # https://github.com/andrey-git/home-assistant-customizer
 customizer:
   custom_ui: local
+  hide_attributes:
+    - node_id
+    - value_index
 
 # https://home-assistant.io/components/frontend/
 frontend:
   themes: !include_dir_named config/themes/
-  javascript_version: es5
   extra_html_url:
-    - /local/custom_ui/state-card-tiles.html
+    - /local/custom_ui/state-card-custom-ui.html
   extra_html_url_es5:
-    - /local/custom_ui/state-card-tiles.html
+    - /local/custom_ui/state-card-custom-ui-es5.html
+  javascript_version: auto
 
 # https://home-assistant.io/docs/ecosystem/ios/
 ios:
+  push:
+    categories:
+      - name: CoffeeTimer
+        identifier: 'coffeetimer'
+        actions:
+          - identifier: 'COFFEE_20_MINUTES'
+            title: '20 minuter till'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: no
+            behavior: 'default'
+          - identifier: 'COFFEE_TURNOFF'
+            title: 'Stäng av'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: yes
+            behavior: 'default'
+      - name: AlarmClock
+        identifier: 'alarmclock'
+        actions:
+          - identifier: 'ALARM_AWAKE'
+            title: 'Ja, nu'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: no
+            behavior: 'default'
+          - identifier: 'ALARM_AWAKE_SHOWER_FIRST'
+            title: 'Ja, efter min dusch'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: no
+            behavior: 'default'
+          - identifier: 'ALARM_NOT_AWAKE'
+            title: 'Nej'
+            activationMode: 'foreground'
+            authenticationRequired: no
+            destructive: yes
+            behavior: 'default'
+      - name: ComingHomeAndSunIsUp
+        identifier: 'cominghomeandsunisup'
+        actions:
+          - identifier: 'COMINGHOMEANDSUNISUP_YES'
+            title: "Ja tack"
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: no
+            behavior: 'default'
+          - identifier: 'COMINGHOMEANDSUNISUP_NO'
+            title: "Nej tack"
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: yes
+            behavior: 'default'
 
 # Enable text-to-speech
 tts: !include config/tts.yaml
@@ -43,6 +99,8 @@ http:
   base_url: !secret http_address
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
+  ip_ban_enabled: True
+  login_attempts_threshold: 3
 
 discovery:
   ignore:
