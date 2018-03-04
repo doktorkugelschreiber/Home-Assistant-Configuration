@@ -1,5 +1,5 @@
 # Automatically turn everything off
-alias: "Automatisk avstängning när vi går hemifrån"
+alias: "Något är på och ingen är hemma"
 trigger:
   platform: state
   entity_id: group.all_devices
