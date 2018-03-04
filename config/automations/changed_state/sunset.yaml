@@ -1,9 +1,9 @@
 # Run evening script at sunset if someone is home
-alias: "Kör hemmaläge vid solnedgången"
+alias: "Scen Hemma vid solnedgång"
 trigger:
   platform: sun
   event: sunset
-  offset: '-01:00:00'
+  offset: '-00:00:15'
 
 condition:
   condition: and
