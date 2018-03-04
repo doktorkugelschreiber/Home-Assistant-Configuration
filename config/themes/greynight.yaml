@@ -73,3 +73,13 @@
   paper-slider-disabled-active-color: 'hsl(var(--base-hue), 80%, 25%)'
   paper-slider-disabled-secondary-color: 'hsl(var(--base-hue), 80%, 25%)'
   paper-dialog-color: 'hsl(var(--base-hue), 20%, 80%)'
+
+  #Font
+  primary-font-family: "Gill Sans"
+  paper-font-common-base_-_font-family: "var(--primary-font-family)"
+  paper-font-common-code_-_font-family: "var(--primary-font-family)"
+  paper-font-body1_-_font-family: "var(--primary-font-family)"
+  paper-font-subhead_-_font-family: "var(--primary-font-family)"
+  paper-font-headline_-_font-family: "var(--primary-font-family)"
+  paper-font-caption_-_font-family: "var(--primary-font-family)"
+  paper-font-title_-_font-family: "var(--primary-font-family)"
