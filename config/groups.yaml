@@ -8,28 +8,34 @@
     entities:
       - device_tracker.erikasiphone
       - device_tracker.isaksiphone
+      - sensor.entities_on
       - sensor.alarm_activated_badge
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_cloud_coverage
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_wind_speed
-      - group.scenepicker
       - group.hall
       - group.vardagsrum
       - group.kitchen
       - group.bedroom
-      - group.alarmclock
 
-# What to view on media page
-  media:
-    name: Media
-    icon: mdi:itunes
+# What to view on weather page
+  weather:
+    name: Weather
+    icon: mdi:thermometer-lines
     view: yes
     entities:
-      - group.tvcontrol
-      - media_player.vardagsrum
-      - media_player.sovrum
-      - media_player.apple_tv
+      - group.weather_card_today
+      - group.weather_card_forecast
+      - group.pollenkoll
+
+# What to view on automations page
+  settings:
+    name: Settings
+    view: yes
+    icon: mdi:tune
+    entities:
+      - group.scenepicker
+      - group.alarmclock
+      - group.countdowns
+      - group.automatic_scenes
+      - group.notifications
 
 # What to view on sensors page
   sensors:
@@ -40,17 +46,17 @@
       - group.batteries
       - group.powerconsumption
       - group.system
-      - group.pollenkoll
-
-# What to view on automations page
-  robot:
-    name: Robot
+      
+# What to view on media page
+  media:
+    name: Media
+    icon: mdi:itunes
     view: yes
-    icon: mdi:robot
     entities:
-      - group.countdowns
-      - group.automatic_scenes
-      - group.notifications
+      - group.tvcontrol
+      - media_player.vardagsrum
+      - media_player.sovrum
+      - media_player.apple_tv
 
 
 ######################################
@@ -119,14 +125,14 @@
   automatic_scenes:
     name: Automatiska scenkörningar
     entities:
-      - automation.kor_hemmalage_vid_solnedgangen
-      - automation.kor_hemmalage_vid_hemkomst_efter_solnedgangen
-      - automation.starta_tvlage_da_apple_tv_spelar_efter_solnedgang
-      - automation.starta_timer_da_apple_tv_pausar_efter_solnedgang
+      - automation.scen_hemma_vid_hemkomst_och_morkt
+      - automation.scen_hemma_vid_solnedgang
+      - automation.scen_tv_da_apple_tv_spelar
+      - automation.scen_hemma_da_apple_tv_pausas
 
   notifications:
     name: Notifieringar
     entities:
       - automation.erika_kommer_hem
       - automation.isak_kommer_hem
-      - automation.skicka_notis_om_eluttag_ar_pa_men_ingen_ar_hemma
+      - automation.nagot_ar_pa_och_ingen_ar_hemma
