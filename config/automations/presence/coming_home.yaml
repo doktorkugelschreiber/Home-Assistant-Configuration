@@ -1,5 +1,5 @@
 # Run evening script when someone comes home after sunset
-alias: "Kör Hemmaläge vid hemkomst efter solnedgången"
+alias: "Scen Hemma vid hemkomst och mörkt"
 trigger:
   platform: state
   entity_id: group.all_devices
