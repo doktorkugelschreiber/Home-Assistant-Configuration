@@ -9,7 +9,7 @@ timer:
     duration: '00:00:30'
 
 automation:
-  - alias: "Starta TV-läge då Apple TV spelar efter solnedgång"
+  - alias: "Scen TV då Apple TV spelar"
     trigger:
       platform: state
       entity_id: media_player.apple_tv
@@ -31,7 +31,7 @@ automation:
         entity_id: timer.atvpaused
 
 
-  - alias: "Starta timer om Apple TV pausar efter solnedgång"
+  - alias: "Scen Hemma då Apple TV pausas"
     trigger:
       platform: state
       entity_id: media_player.apple_tv
