@@ -136,5 +136,7 @@
     name: Notifieringar
     entities:
       - automation.erika_kommer_hem
+      - automation.erika_nastan_hemma
       - automation.isak_kommer_hem
+      - automation.isak_nastan_hemma
       - automation.nagot_ar_pa_och_ingen_ar_hemma
