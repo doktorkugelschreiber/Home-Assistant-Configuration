@@ -1,120 +1,120 @@
 automation:
 # Notify Isak when Erika comes home
-  alias: "Erika kommer hem"
-  trigger:
-    platform: state
-    entity_id: device_tracker.erikasiphone
-    to: 'home'
+  - alias: "Erika kommer hem"
+    trigger:
+      platform: state
+      entity_id: device_tracker.erikasiphone
+      to: 'home'
 
-  condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: '{{ states.device_tracker.isaksiphone.state == 'not_home' }}'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{ states.device_tracker.isaksiphone.state == "not_home" }}'
 
-  action:
-    - service: notify.ios_isaksiphone
-      data:
-        message: "Erika kom precis hem."
-    - service: notify.ios_erikasiphone
-      data_template:
-        title: "Hej Erika"
-        message: >
-          {% if is_state('sun.sun', 'below_horizon') %}
-            "Det är mörkt ute. Jag har tänt åt dig."
-          {% else %}
-            "Det är fortfarande ljust. Vill du tända lite lampor?"
-          {% endif %}
+    action:
+      - service: notify.ios_isaksiphone
         data:
-          push:
-            category:
-              "cominghomeandsunisup"
+          message: "Erika kom precis hem."
+      - service: notify.ios_erikasiphone
+        data_template:
+          title: "Hej Erika"
+          message: >
+            {% if is_state('sun.sun', 'below_horizon') %}
+              "Det är mörkt ute. Jag har tänt åt dig."
+              {% else %}
+              "Det är fortfarande ljust. Vill du tända lite lampor?"
+              {% endif %}
+          data:
+            push:
+              category:
+                "cominghomeandsunisup"
 
 # Notify Erika when Isak comes home
-  alias: "Isak kommer hem"
-  trigger:
-    platform: state
-    entity_id: device_tracker.isaksiphone
-    to: 'home'
+  - alias: "Isak kommer hem"
+    trigger:
+      platform: state
+      entity_id: device_tracker.isaksiphone
+      to: 'home'
 
-  condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: '{{ states.device_tracker.erikasiphone.state == 'not_home' }}'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{ states.device_tracker.erikasiphone.state == "not_home" }}'
 
-  action:
-    - service: notify.ios_isaksiphone
-      data:
-        message: "Välkommen hem Isak."
+    action:
+      - service: notify.ios_isaksiphone
+        data:
+          message: "Välkommen hem Isak."
 
-    - service: notify.ios_erikasiphone
-      data:
-        message: "Isak kom precis hem."
+      - service: notify.ios_erikasiphone
+        data:
+          message: "Isak kom precis hem."
 
 # Run scene script when someone comes home after sunset
-  alias: "Scen Hemma vid hemkomst och mörkt"
-  trigger:
-    platform: state
-    entity_id: group.all_devices
-    to: 'home'
+  - alias: "Scen Hemma vid hemkomst och mörkt"
+    trigger:
+      platform: state
+      entity_id: group.all_devices
+      to: 'home'
 
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: 'below_horizon'
 
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.scenepicker
-        option: "Hemma"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.scenepicker
+          option: "Hemma"
 
 # Perform action based on actionable notification
-  alias: "Erika väljer om lampan ska tändas"
-  hide_entity: true
+  - alias: "Erika väljer om lampan ska tändas"
+    hide_entity: true
 
-  trigger:
-    platform: event
-    event_type: ios.notification_action_fired
-    event_data:
-      actionName: COMINGHOMEANDSUNISUP_YES
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: COMINGHOMEANDSUNISUP_YES
 
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.scenepicker
-        option: "Hemma"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.scenepicker
+          option: "Hemma"
 
 # Automatically turn everything off
-  alias: "Något är på och ingen är hemma"
-  trigger:
-    platform: state
-    entity_id: group.all_devices
-    from: 'home'
+  - alias: "Något är på och ingen är hemma"
+    trigger:
+      platform: state
+      entity_id: group.all_devices
+      from: 'home'
 
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: group.all_switches
-        state: 'on'
-      - condition: state
-        entity_id: group.all_lights
-        state: 'on'
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: group.all_switches
+          state: 'on'
+        - condition: state
+          entity_id: group.all_lights
+          state: 'on'
 
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.scenepicker
-        option: "Borta"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.scenepicker
+          option: "Borta"
 
-    - service: notify.ios_isaksiphone
-      data:
-        message: "Du glömde släcka innan du gick. Jag har gjort det åt dig."
+      - service: notify.ios_isaksiphone
+        data:
+          message: "Du glömde släcka innan du gick. Jag har gjort det åt dig."
 
-    - service: notify.ios_erikasiphone
-      data:
-        message: "Du glömde släcka innan du gick. Jag har gjort det åt dig."
+      - service: notify.ios_erikasiphone
+        data:
+          smessage: "Du glömde släcka innan du gick. Jag har gjort det åt dig."
