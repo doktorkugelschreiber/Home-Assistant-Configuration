@@ -15,6 +15,8 @@ automation:
           - light.kitchen_spotlight_level
           - light.livingroom_cornerlight_level
           - switch.samsung_tv
+          - switch.sonos_bedroom
+          - switch.sonos_livingroom
       - platform: homeassistant
         event: start
     action:

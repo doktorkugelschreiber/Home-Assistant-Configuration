@@ -30,7 +30,7 @@ frontend:
     - /local/custom_ui/state-card-custom-ui-es5.html
   javascript_version: auto
 
-# Python Script
+# Enable python script component. The scripts are stored in /python_scripts
 python_script:
 
 # https://home-assistant.io/docs/ecosystem/ios/
@@ -122,10 +122,11 @@ device_tracker: !include config/device_tracker.yaml
 # Track the sun
 sun:
 
+# Enable history component
 history: !include config/history.yaml
 
+# Enable logbook component
 logbook: !include config/logbook.yaml
-
 
 # Inclusions
 sensor: !include config/sensors.yaml

@@ -1,16 +1,4 @@
-- name: SATS
-  latitude: !secret gym_latitude
-  longitude: !secret gym_longitude
-  radius: 100
-  icon: mdi:weight-kilogram
-
-- name: Universitetet
-  latitude: !secret university_latitude
-  longitude: !secret university_longitude
-  icon: mdi:school
+- name: "Nästan hemma"
+  latitude: !secret hass_latitude
+  longitude: !secret hass_longitude
   radius: 300
-
-- name: "Läskiga backen"
-  latitude: !secret laskigabacken_latitude
-  longitude: !secret laskigabacken_longitude
-  radius: 50

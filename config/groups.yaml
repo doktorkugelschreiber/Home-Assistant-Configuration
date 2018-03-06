@@ -46,7 +46,7 @@
       - group.batteries
       - group.powerconsumption
       - group.system
-      
+
 # What to view on media page
   media:
     name: Media
@@ -74,6 +74,7 @@
       - switch.livingroom_window_switch
       - light.livingroom_cornerlight_level
       - switch.samsung_tv
+      - switch.sonos_livingroom
 
   kitchen:
     name: "Kök"
@@ -89,6 +90,7 @@
       - switch.bedroom_window_switch
       - light.bedroom_erikabedside_level
       - light.bedroom_isakbedside_level
+      - switch.sonos_bedroom
 
 # Groups within sensors page
   powerconsumption:
