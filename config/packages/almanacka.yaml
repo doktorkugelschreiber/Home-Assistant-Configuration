@@ -1,0 +1,21 @@
+sensor:
+  - platform: template
+    sensors:
+      sunelevation:
+        friendly_name: "Solens höjd"
+        value_template: "{{ states.sun.sun.attributes.elevation }}"
+      nextsunrise:
+        friendly_name: "Nästa soluppgång"
+        value_template: "{{ as_timestamp(states.sun.sun.attributes.next_rising) | timestamp_custom('%H:%M') }}"
+      nextsunset:
+        friendly_name: "Nästa solnedgång"
+        value_template: "{{ as_timestamp(states.sun.sun.attributes.next_setting) | timestamp_custom('%H:%M') }}"
+
+group:
+  almanacka:
+    name: "Solen"
+    entities:
+      - sun.sun
+      - sensor.sunelevation
+      - sensor.nextsunset
+      - sensor.nextsunrise

@@ -8,12 +8,20 @@ switch.hall_spegel_switch:
   friendly_name: Spegel
   icon: mdi:lightbulb
   homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    entity_id: sensor.hall_spegel_power
+    blacklist_states: 0
 
 # Vardagsrummet
 switch.livingroom_window_switch:
   friendly_name: Fönster
   icon: mdi:lightbulb
   homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    entity_id: sensor.livingroom_window_power
+    blacklist_states: 0
 
 light.livingroom_cornerlight_level:
   friendly_name: Soffan
@@ -27,11 +35,19 @@ switch.samsung_tv:
   homebridge_visible: true
   homebridge_switch_type: outlet
 
+switch.hdmi_4:
+  icon: mdi:television-box
+  friendly_name: "Telia TV"
+
 # Sovrummet
 switch.bedroom_window_switch:
   friendly_name: Fönster
   icon: mdi:lightbulb
   homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    entity_id: sensor.bedroom_window_power
+    blacklist_states: 0
 
 light.bedroom_isakbedside_level:
   friendly_name: "Isaks sänglampa"
@@ -52,11 +68,19 @@ switch.kitchen_window_switch:
   friendly_name: Fönster
   icon: mdi:lightbulb
   homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    entity_id: sensor.kitchen_window_power
+    blacklist_states: 0
 
 switch.kitchen_tolomeo_switch:
   friendly_name: Tolomeo
   icon: mdi:lightbulb
   homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    entity_id: sensor.kitchen_tolomeo_power
+    blacklist_states: 0
 
 light.kitchen_spotlight_level:
   friendly_name: "Spotlight"
@@ -64,13 +88,28 @@ light.kitchen_spotlight_level:
   custom_ui_state_card: state-card-custom-ui
   state_card_mode: break-slider
   stretch_slider: true
+  extra_badge:
+    entity_id: sensor.kitchen_spotlight_power
+    blacklist_states: 0
 
 switch.kitchen_coffeebrewer_switch:
   friendly_name: Kaffebryggare
+  icon: mdi:water
   homebridge_visible: true
   homebridge_switch_type: outlet
   custom_ui_state_card: state-card-custom-ui
-  show_last_changed: true
+  extra_badge:
+    entity_id: sensor.kitchen_coffeebrewer_power
+    blacklist_states: 0
+
+# Badrummet
+switch.bathroom_wallplug_switch:
+  icon: mdi:fan
+  homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    entity_id: sensor.bathroom_wallplug_switch
+    blacklist_states: 0
 
 ####################################################
 #                                                  #
@@ -78,7 +117,7 @@ switch.kitchen_coffeebrewer_switch:
 #                                                  #
 ####################################################
 media_player.vardagsrum:
-  friendly_name: Vardagsrum
+  friendly_name: "Sonos Playbar"
 
 media_player.apple_tv:
   friendly_name: "Apple TV"
@@ -133,6 +172,12 @@ sensor.disk_use_percent_:
 
 sensor.since_last_boot:
   friendly_name: "Uptime"
+
+sensor.bathroom_aeotec_relative_humidity:
+  icon: mdi:water-percent
+
+sensor.bathroom_aeotec_temperature:
+  icon: mdi:theme-light-dark
 
 ####################################################
 #                                                  #

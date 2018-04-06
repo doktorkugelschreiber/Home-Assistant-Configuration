@@ -43,7 +43,7 @@
   paper-grey-200: 'hsl(var(--huesat) 10%)' #active menu item
   # Paper card
   paper-item-icon-color: 'hsl(var(--huesat) 40%)'
-  paper-item-icon-active-color: 'var(--paper-item-icon-color)'
+  paper-item-icon-active-color: '#F9C536'
   paper-item-icon_-_color: 'var(--paper-item-icon-color)'
   paper-item-selected_-_background-color: 'hsla(0, 0%, 0%, 0.2)'
   paper-item-selected_-_color: 'hsl(var(--huesat) 20%)' #?

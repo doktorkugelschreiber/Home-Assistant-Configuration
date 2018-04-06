@@ -1,7 +1,5 @@
 <div hidden="" by-polymer-bundler=""><script>
 window.customUI = window.customUI || {
-  VERSION: '20180126',
-
   SUPPORTED_SLIDER_MODES: [
     'single-line', 'break-slider', 'break-slider-toggle', 'hide-slider', 'no-slider',
   ],
@@ -118,7 +116,11 @@ window.customUI = window.customUI || {
       }
       const value = window.customUI.computeTemplate(
         template, hass, states, stateObj, attributes,
-        attributes[key], stateObj.state);
+        (stateObj.untemplated_attributes && stateObj.untemplated_attributes[key]) ||
+            attributes[key],
+        stateObj.untemplated_state || stateObj.state);
+      // In case of null don't set the value.
+      if (value === null) return;
       newAttributes[key] = value;
       if (key === 'state') {
         if (value !== stateObj.state) {
@@ -140,10 +142,14 @@ window.customUI = window.customUI || {
       // We are operating on real attributes. Replace them.
       const result = window.customUI.applyAttributes(stateObj, newAttributes);
       if (Object.prototype.hasOwnProperty.call(newAttributes, 'state')) {
-        result.state = newAttributes.state;
+        if (newAttributes.state !== null) {
+          result.state = String(newAttributes.state);
+          result.untemplated_state = stateObj.state;
+        }
       }
       if (Object.prototype.hasOwnProperty.call(newAttributes, '_stateDisplay')) {
         result._stateDisplay = newAttributes._stateDisplay;
+        result.untemplated_stateDisplay = stateObj._stateDisplay;
       }
       window.customUI._setKeep(result, !hasGlobal);
       return result;
@@ -182,6 +188,7 @@ window.customUI = window.customUI || {
       entity_id: stateObj.entity_id,
       state: stateObj.state,
       attributes: Object.assign({}, stateObj.attributes, attributes),
+      untemplated_attributes: stateObj.attributes,
       last_changed: stateObj.last_changed,
     };
   },
@@ -240,6 +247,12 @@ window.customUI = window.customUI || {
     if (devInfo === null) {
       // DOM not ready. Wait 1 second.
       window.setTimeout(window.customUI.showVersion, 1000);
+      return;
+    }
+    if (devInfo.hass && devInfo.hass.config && devInfo.hass.config.core &&
+        devInfo.hass.config.core.version &&
+        devInfo.hass.config.core.version.split('.')[1] > 65) {
+      // 0.66 introduced proper display if customui versions.
       return;
     }
     const about = window.customUI.lightOrShadow(devInfo, '.about');
@@ -339,34 +352,62 @@ window.customUI = window.customUI || {
       'partial-panel-resolver',
       'ha-panel-config']);
     if (!haPanelConfig) {
-      // DOM not ready. Wait 1 second.
-      window.setTimeout(window.customUI.updateConfigPanel, 1000);
+      // DOM not ready. Wait 100ms.
+      window.setTimeout(window.customUI.updateConfigPanel, 100);
       return;
     }
-    const ironPages = window.customUI.lightOrShadow(haPanelConfig, 'iron-pages');
-    if (!ironPages) return;
     const haConfigNavigation = window.customUI.getElementHierarchy(haPanelConfig, [
       'ha-config-dashboard',
       'ha-config-navigation']);
-    if (!haConfigNavigation) return;
-    if (ironPages.lastElementChild.tagName !== 'HA-CONFIG-CUSTOM-UI') {
-      const haConfigCustomUi = document.createElement('ha-config-custom-ui');
-      haConfigCustomUi.isWide = window.customUI.domHost(ironPages).isWide;
-      haConfigCustomUi.setAttribute('page-name', 'customui');
-      ironPages.appendChild(haConfigCustomUi);
-      ironPages.addEventListener('iron-items-changed', () => {
-        if (window.location.pathname.startsWith('/config/customui')) {
-          ironPages.select('customui');
-        }
-      });
+    if (haConfigNavigation) {
+      // HaConfigNavigation started using localize on 21.01.2018
+      if (haConfigNavigation.localize && !haConfigNavigation.cuiPatch) {
+        haConfigNavigation.cuiPatch = true;
+        haConfigNavigation._originalComputeLoaded = haConfigNavigation._computeLoaded;
+        haConfigNavigation._originalComputeCaption = haConfigNavigation._computeCaption;
+        haConfigNavigation._originalComputeDescription = haConfigNavigation._computeDescription;
+        haConfigNavigation._computeLoaded = (hass, page) =>
+          page === 'customui' || haConfigNavigation._originalComputeLoaded(hass, page);
+        haConfigNavigation._computeCaption = (page, localize) =>
+          (page === 'customui' ? 'Custom UI' : haConfigNavigation._originalComputeCaption(page, localize));
+        haConfigNavigation._computeDescription = (page, localize) =>
+          (page === 'customui' ? 'SetUI tweaks' : haConfigNavigation._originalComputeDescription(page, localize));
+      }
+      if (!haConfigNavigation.pages.some(conf => conf === 'customui' || conf.domain === 'customui')) {
+        haConfigNavigation.push('pages', haConfigNavigation.localize ? 'customui' : {
+          domain: 'customui',
+          caption: 'Custom UI',
+          description: 'Set UI tweaks.',
+          loaded: true,
+        });
+      }
     }
-    if (!haConfigNavigation.pages.some(conf => conf.domain === 'customui')) {
-      haConfigNavigation.push('pages', {
-        domain: 'customui',
-        caption: 'Custom UI',
-        description: 'Set UI tweaks.',
-        loaded: true,
-      });
+    const getHaConfigCustomUi = () => {
+      const haConfigCustomUi = document.createElement('ha-config-custom-ui');
+      haConfigCustomUi.isWide = haPanelConfig.isWide;
+      haConfigCustomUi.setAttribute('page-name', 'customui');
+      return haConfigCustomUi;
+    };
+
+    const ironPages = window.customUI.lightOrShadow(haPanelConfig, 'iron-pages');
+    if (ironPages) {
+      if (ironPages.lastElementChild.tagName !== 'HA-CONFIG-CUSTOM-UI') {
+        const haConfigCustomUi = getHaConfigCustomUi();
+        ironPages.appendChild(haConfigCustomUi);
+        ironPages.addEventListener('iron-items-changed', () => {
+          if (window.location.pathname.startsWith('/config/customui')) {
+            ironPages.select('customui');
+          }
+        });
+      }
+    } else {
+      const root = haPanelConfig.shadowRoot || haPanelConfig;
+      if (root.lastElementChild.tagName !== 'HA-CONFIG-CUSTOM-UI') {
+        const haConfigCustomUi = getHaConfigCustomUi();
+        root.appendChild(haConfigCustomUi);
+      }
+      const visible = window.location.pathname.startsWith('/config/customui');
+      root.lastElementChild.style.display = visible ? '' : 'none';
     }
   },
 
@@ -392,6 +433,10 @@ window.customUI = window.customUI || {
         });
       }
       originalUpdate.call(this, obj);
+      if (obj.themes && hass._themeWaiters) {
+        hass._themeWaiters.forEach(waiter => waiter.stateChanged(waiter.state));
+        hass._themeWaiters = undefined;
+      }
     };
     const main = window.customUI.lightOrShadow(document, 'home-assistant');
     if (main.hass && main.hass.states) {
@@ -426,10 +471,17 @@ window.customUI = window.customUI || {
     // Use named function to preserve 'this'.
     haStateLabelBadge.prototype.stateChanged = function update(stateObj) {
       // TODO: Call window.customUI.maybeChangeObject
-      window.hassUtil.applyThemesOnElement(
-        this,
-        this.hass.themes || { default_theme: 'default', themes: {} },
-        stateObj.attributes.theme || 'default');
+      if (stateObj.attributes.theme) {
+        if (this.hass.themes === null) {
+          this.hass._themeWaiters = this.hass._themeWaiters || [];
+          this.hass._themeWaiters.push(this);
+        } else {
+          window.hassUtil.applyThemesOnElement(
+            this,
+            this.hass.themes || { default_theme: 'default', themes: {} },
+            stateObj.attributes.theme || 'default');
+        }
+      }
       this.updateStyles();
       if (this.startInterval) {
         // Added on 19.1.18
@@ -464,6 +516,14 @@ window.customUI = window.customUI || {
     /* eslint-disable no-console */
     console.log(`Loaded CustomUI ${window.customUI.VERSION}`);
     /* eslint-enable no-console */
+    if (!window.CUSTOM_UI_LIST) {
+      window.CUSTOM_UI_LIST = [];
+    }
+    window.CUSTOM_UI_LIST.push({
+      name: 'CustomUI',
+      version: window.customUI.VERSION,
+      url: 'https://github.com/andrey-git/home-assistant-custom-ui',
+    });
   },
 
   runHooks() {
@@ -500,7 +560,11 @@ window.customUI = window.customUI || {
     }
   },
 };
-
+</script>
+<script>
+window.customUI.VERSION = '20180330';
+</script>
+<script>
 window.customUI.init();
 </script>
 <dom-module id="ha-config-custom-ui">
@@ -509,7 +573,7 @@ window.customUI.init();
     <app-header-layout has-scrolling-region="">
       <app-header slot="header" fixed="">
         <app-toolbar>
-          <paper-icon-button icon="mdi:arrow-left" on-tap="_backTapped"></paper-icon-button>
+          <paper-icon-button icon="mdi:arrow-left" on-click="_backHandler"></paper-icon-button>
           <div main-title="">Custom UI settings</div>
         </app-toolbar>
       </app-header>
@@ -527,7 +591,7 @@ window.customUI.init();
 </dom-module>
 
 <script>
-class HaConfigCustomUi extends Polymer.Element {
+class HaConfigCustomUi extends window.hassMixins.EventsMixin(Polymer.Element) {
   static get is() { return 'ha-config-custom-ui'; }
 
   static get properties() {
@@ -550,8 +614,9 @@ class HaConfigCustomUi extends Polymer.Element {
     window.customUI.setName(name);
   }
 
-  _backTapped() {
+  _backHandler() {
     window.history.back();
+    this.fire('location-changed');
   }
 }
 customElements.define(HaConfigCustomUi.is, HaConfigCustomUi);
@@ -695,7 +760,7 @@ customElements.define(DynamicElement.is, DynamicElement);
           <div class="control-wrapper">
             <dynamic-element class="flex" state-obj="[[stateObj]]" hass="[[hass]]" element-name="[[controlElement]]"></dynamic-element>
             <template is="dom-if" if="[[isConfirmControls(stateObj)]]">
-              <div id="overlay" on-tap="tapHandler">
+              <div id="overlay" on-click="clickHandler">
                 <template is="dom-if" if="[[stateObj.attributes.confirm_controls_show_lock]]">
                   <iron-icon id="lock" class$="[[controlElement]]" icon="mdi:lock-outline"></iron-icon>
                 </template>
@@ -769,7 +834,7 @@ class DynamicWithExtra extends (StateCardDisplay || Polymer.Element) {
       }
       if (!result) return null;
       let blacklist = extraBadge.blacklist_states;
-      if (blacklist) {
+      if (blacklist !== undefined) {
         if (!Array.isArray(blacklist)) {
           blacklist = [blacklist];
         }
@@ -809,7 +874,7 @@ class DynamicWithExtra extends (StateCardDisplay || Polymer.Element) {
         stateObj.attributes.confirm_controls_show_lock;
   }
 
-  tapHandler(e) {
+  clickHandler(e) {
     this.$$('#overlay').style.pointerEvents = 'none';
     const lock = this.$$('#lock');
     if (lock) {
@@ -874,11 +939,6 @@ class HaThemedSlider extends Polymer.Element {
 
   ready() {
     super.ready();
-    // If value was above 100 it wouldn't propagate to paper-slider while that had max=100
-    // Force-change the value so that paper-slider will update itself.
-    this.value = this.value + 1;
-    this.value = this.value - 1;
-    // Propagate the themed value upwards.
     this.disableOffWhenMin = !this._computeAttribute(this.theme, 'off_when_min', !this.disableOffWhenMin);
     this.computeEnabledThemedReportWhenNotChanged(this.theme, this.disableReportWhenNotChanged);
   }
@@ -1022,7 +1082,7 @@ customElements.define(HaThemedSlider.is, HaThemedSlider);
       </div>
       <template is="dom-if" if="[[showSlider]]" restamp="">
         <div class="horizontal layout flex-auto end-justified second-line">
-          <ha-themed-slider id="slider" max="[[max]]" min="[[min]]" theme="[[stateObj.attributes.slider_theme]]" is-on="[[isOn(stateObj, nameOn)]]" value="{{sliderValue}}" disable-off-when-min="{{disableOffWhenMin}}" on-change="sliderChanged" on-tap="stopPropagation">
+          <ha-themed-slider id="slider" max="[[max]]" min="[[min]]" theme="[[stateObj.attributes.slider_theme]]" is-on="[[isOn(stateObj, nameOn)]]" value="{{sliderValue}}" disable-off-when-min="{{disableOffWhenMin}}" on-change="sliderChanged" on-click="stopPropagation">
           </ha-themed-slider>
           <template is="dom-if" if="[[!breakSlider]]">
             <dynamic-with-extra hass="[[hass]]" state-obj="[[stateObj]]" control-element="[[controlElement]]" in-dialog="[[inDialog]]"></dynamic-with-extra>
@@ -1209,13 +1269,11 @@ class StateCardWithSlider extends Polymer.mixinBehaviors(
   }
 
   stateObjChanged(stateObj, nameOn, valueName) {
-    if (this.isOn(stateObj, nameOn)) {
-      this.sliderValue = stateObj.attributes[valueName];
-    } else {
-      this.sliderValue = 0;
-    }
+    const obj = {
+      sliderValue: this.isOn(stateObj, nameOn) ? stateObj.attributes[valueName] : 0,
+    };
     if (stateObj) {
-      const obj = {
+      Object.assign(obj, {
         minLineBreak: 0,
         maxLineBreak: 999,
         hideSlider: false,
@@ -1223,8 +1281,10 @@ class StateCardWithSlider extends Polymer.mixinBehaviors(
         lineTooLong: false,
         mode: stateObj.attributes.state_card_mode,
         stretchSlider: !!stateObj.attributes.stretch_slider,
-      };
-      this.setProperties(obj);
+      });
+    }
+    this.setProperties(obj);
+    if (stateObj) {
       this._waitForLayout();
     }
   }
@@ -1359,7 +1419,7 @@ customElements.define(StateCardWithoutSlider.is, StateCardWithoutSlider);
           this._container.style.display = 'inline-block';
           const params = { display: 'inline-block' };
           if (this._container.classList.contains('state')) {
-            params.margin = 'var(--ha-badges-card-margin, 0 -6px)';
+            params.margin = 'var(--ha-badges-card-margin, 0)';
           }
           this.updateStyles(params);
         }

@@ -1,4 +1,0 @@
-- name: "Nästan hemma"
-  latitude: !secret hass_latitude
-  longitude: !secret hass_longitude
-  radius: 500
