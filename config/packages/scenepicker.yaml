@@ -26,9 +26,6 @@
 ####      entity_id: input_select.scenepicker
 ####      option: "Hemma"
 ##
-## I prefer using script: rather than scene: since it is more versatile.
-## Whenever I refer to scenes, that means I refer to a script that calls services such as
-## light.turn_on or switch_turn.on
 
 ##############################################################################
 ## INPUT SELECT
@@ -39,13 +36,11 @@ input_select:
     name: "Scen"
     icon: mdi:weather-sunset
     options:
-      - "--Välj--"
       - "Morgon"
-      - "Borta"
-      - "Hemma"
+      - "Allt av"
+      - "Småbelysning"
       - "TV"
       - "Läggdags"
-      - "Sova"
 
 ##############################################################################
 ## AUTOMATIONS
@@ -60,21 +55,19 @@ automation:
     entity_id: input_select.scenepicker
 
   action:
-    - service: script.turn_on
+    - service: scene.turn_on
       data_template:
         entity_id: >
           {% if is_state("input_select.scenepicker", "Morgon") %}
-            script.morning
-          {%-elif is_state("input_select.scenepicker", "Borta") %}
-            script.leavinghome
-          {%-elif is_state("input_select.scenepicker", "Hemma") %}
-            script.evening
+            scene.morgon
+          {%-elif is_state("input_select.scenepicker", "Allt av") %}
+            scene.allt_av
+          {%-elif is_state("input_select.scenepicker", "Småbelysning") %}
+            scene.smabelysning
           {%-elif is_state("input_select.scenepicker", "TV") %}
-            script.movietime
+            scene.tv
           {%-elif is_state("input_select.scenepicker", "Läggdags") %}
-            script.bedtime
-          {%-elif is_state("input_select.scenepicker", "Sova") %}
-            script.night
+            scene.bedtime
           {% else %}
             none
           {% endif %}

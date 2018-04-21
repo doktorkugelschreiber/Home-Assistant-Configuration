@@ -130,8 +130,9 @@ logbook: !include config/logbook.yaml
 
 # Inclusions
 sensor: !include config/sensors.yaml
+binary_sensor: !include config/binary_sensor.yaml
 group: !include config/groups.yaml
-automation: !include_dir_list config/automations/
+automation: !include config/automations.yaml
 zone: !include config/zones.yaml
-script: !include_dir_named config/scripts/
-scene: !include_dir_named config/scenes/
+script: !include config/scripts.yaml
+scene: !include config/scenes.yaml

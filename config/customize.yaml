@@ -1,8 +1,3 @@
-####################################################
-#                                                  #
-#                     SWITCHES                     #
-#                                                  #
-####################################################
 # Hallen
 switch.hall_spegel_switch:
   friendly_name: Spegel
@@ -15,6 +10,12 @@ switch.hall_spegel_switch:
     blacklist_states: 0
 
 # Vardagsrummet
+light.livingroom_cornerlight_level:
+  friendly_name: Soffan
+  homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  state_card_mode: break-slider
+  stretch_slider: true
 switch.livingroom_window_switch:
   friendly_name: Fönster
   icon: mdi:lightbulb
@@ -24,24 +25,27 @@ switch.livingroom_window_switch:
     attribute: power_consumption
     unit: W
     blacklist_states: 0
+media_player.vardagsrum:
+  friendly_name: "Sonos Playbar"
+media_player.apple_tv:
+  friendly_name: "Apple TV"
+binary_sensor.samsung_tv_ping:
+  icon: mdi:television
+  friendly_name: TV
 
-light.livingroom_cornerlight_level:
-  friendly_name: Soffan
+# Sovrummet
+light.bedroom_isakbedside_level:
+  friendly_name: "Isaks sänglampa"
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
   state_card_mode: break-slider
   stretch_slider: true
-
-switch.samsung_tv:
-  icon: mdi:television
+light.bedroom_erikabedside_level:
+  friendly_name: "Erikas sänglampa"
   homebridge_visible: true
-  homebridge_switch_type: outlet
-
-switch.hdmi_4:
-  icon: mdi:television-box
-  friendly_name: "Telia TV"
-
-# Sovrummet
+  custom_ui_state_card: state-card-custom-ui
+  state_card_mode: break-slider
+  stretch_slider: true
 switch.bedroom_window_switch:
   friendly_name: Fönster
   icon: mdi:lightbulb
@@ -52,41 +56,7 @@ switch.bedroom_window_switch:
     unit: W
     blacklist_states: 0
 
-light.bedroom_isakbedside_level:
-  friendly_name: "Isaks sänglampa"
-  homebridge_visible: true
-  custom_ui_state_card: state-card-custom-ui
-  state_card_mode: break-slider
-  stretch_slider: true
-
-light.bedroom_erikabedside_level:
-  friendly_name: "Erikas sänglampa"
-  homebridge_visible: true
-  custom_ui_state_card: state-card-custom-ui
-  state_card_mode: break-slider
-  stretch_slider: true
-
 # Köket
-switch.kitchen_window_switch:
-  friendly_name: Fönster
-  icon: mdi:lightbulb
-  homebridge_visible: true
-  custom_ui_state_card: state-card-custom-ui
-  extra_badge:
-    attribute: power_consumption
-    unit: W
-    blacklist_states: 0
-
-switch.kitchen_tolomeo_switch:
-  friendly_name: Tolomeo
-  icon: mdi:lightbulb
-  homebridge_visible: true
-  custom_ui_state_card: state-card-custom-ui
-  extra_badge:
-    attribute: power_consumption
-    unit: W
-    blacklist_states: 0
-
 light.kitchen_spotlight_level:
   friendly_name: "Spotlight"
   homebridge_visible: true
@@ -97,7 +67,24 @@ light.kitchen_spotlight_level:
     attribute: power_consumption
     unit: W
     blacklist_states: 0
-
+switch.kitchen_window_switch:
+  friendly_name: Fönster
+  icon: mdi:lightbulb
+  homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    attribute: power_consumption
+    unit: W
+    blacklist_states: 0
+switch.kitchen_tolomeo_switch:
+  friendly_name: Tolomeo
+  icon: mdi:lightbulb
+  homebridge_visible: true
+  custom_ui_state_card: state-card-custom-ui
+  extra_badge:
+    attribute: power_consumption
+    unit: W
+    blacklist_states: 0
 switch.kitchen_coffeebrewer_switch:
   friendly_name: Kaffebryggare
   icon: mdi:water
@@ -118,67 +105,34 @@ switch.bathroom_wallplug_switch:
     attribute: power_consumption
     unit: W
     blacklist_states: 0
-####################################################
-#                                                  #
-#                   MEDIA PLAYERS                  #
-#                                                  #
-####################################################
-media_player.vardagsrum:
-  friendly_name: "Sonos Playbar"
 
-media_player.apple_tv:
-  friendly_name: "Apple TV"
-
-####################################################
-#                                                  #
-#                     SENSORS                      #
-#                                                  #
-####################################################
-sensor.isaks_iphone_battery_level:
-  friendly_name: "Isaks iPhone"
-
-sensor.erikas_iphone_battery_level:
-  friendly_name: "Erikas iPhone"
-
-sensor.hall_spegel_power:
-  icon: mdi:lightbulb
-  friendly_name: "Hall: Spegel"
-
-sensor.livingroom_window_power:
-  icon: mdi:lightbulb
-  friendly_name: "Vardagsrum: Fönster"
-
-sensor.bedroom_window_power:
-  icon: mdi:lightbulb
-  friendly_name: "Sovrum: Fönster"
-
-sensor.kitchen_window_power:
-  icon: mdi:lightbulb
-  friendly_name: "Kök: Fönster"
-
-sensor.kitchen_tolomeo_power:
-  icon: mdi:lightbulb
-  friendly_name: "Kök: Tolomeo"
-
-sensor.kitchen_spotlight_power:
-  icon: mdi:lightbulb
-  friendly_name: "Kök: Spotlight"
-
-sensor.kitchen_coffeebrewer_power:
-  friendly_name: "Kök: Kaffebryggare"
-  icon: mdi:flash
-
+# Tekniska sensorer
 sensor.memory_use_percent:
   friendly_name: "RAM"
-
 sensor.processor_use:
   friendly_name: "CPU"
-
 sensor.disk_use_percent_:
   friendly_name: "HDD"
-
 sensor.since_last_boot:
   friendly_name: "Uptime"
+
+# Vädersensorer
+sensor.dark_sky_cloud_coverage:
+  friendly_name: Moln
+  icon: mdi:cloud
+sensor.dark_sky_precip_intensity:
+  friendly_name: Regn
+  icon: mdi:weather-rainy
+sensor.dark_sky_temperature:
+  friendly_name: Temp
+  icon: mdi:thermometer
+sensor.dark_sky_wind_speed:
+  friendly_name: Vind
+  icon: mdi:weather-windy
+
+
+
+
 
 sensor.bathroom_aeotec_relative_humidity:
   icon: mdi:water-percent
@@ -191,21 +145,7 @@ sensor.bathroom_aeotec_luminance:
 #                 INTERNET SENSORS                 #
 #                                                  #
 ####################################################
-sensor.dark_sky_cloud_coverage:
-  friendly_name: Moln
-  icon: mdi:cloud
 
-sensor.dark_sky_precip_intensity:
-  friendly_name: Regn
-  icon: mdi:weather-rainy
-
-sensor.dark_sky_temperature:
-  friendly_name: Temp
-  icon: mdi:thermometer
-
-sensor.dark_sky_wind_speed:
-  friendly_name: Vind
-  icon: mdi:weather-windy
 
 ####################################################
 #                                                  #

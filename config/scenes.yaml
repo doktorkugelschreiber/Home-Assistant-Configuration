@@ -1,0 +1,97 @@
+- name: "Bedtime"
+  entities:
+    light.bedroom_erikabedside_level:
+      state: on
+      brightness: 160
+    light.bedroom_isakbedside_level:
+      state: on
+      brightness: 160
+    switch.kitchen_window_switch:
+      state: on
+    switch.hall_spegel_switch:
+      state: off
+    switch.livingroom_window_switch:
+      state: off
+    light.livingroom_cornerlight_level:
+      state: off
+    light.kitchen_spotlight_level:
+      state: off
+    switch.kitchen_tolomeo_switch:
+      state: off
+    switch.bedroom_window_switch:
+      state: off
+    script.scene_bedtime_delay:
+      state: on
+  
+- name: "Allt_av"
+  entities:
+    switch.kitchen_window_switch:
+      state: off
+    switch.kitchen_coffeebrewer_switch:
+      state: off
+    light.kitchen_spotlight_level:
+      state: off
+    switch.kitchen_tolomeo_switch:
+      state: off
+    switch.livingroom_window_switch:
+      state: off
+    light.livingroom_cornerlight_level:
+      state: off
+    switch.hall_spegel_switch:
+      state: off
+    switch.bedroom_window_switch:
+      state: off
+    light.bedroom_erika_bedside_level:
+      state: off
+    light.bedroom_isakbedside_level:
+      state: off
+
+- name: "Morgon"
+  entities:
+    switch.kitchen_window_switch:
+      state: on
+    switch.kitchen_coffeebrewer_switch:
+      state: on
+    switch.livingroom_window_switch:
+      state: on
+    light.livingroom_cornerlight_level:
+      state: on
+      brightness: 180
+
+- name: "Smabelysning"
+  entities:
+    switch.kitchen_window_switch:
+      state: on
+    switch.hall_spegel_switch:
+      state: on
+    switch.livingroom_window_switch:
+      state: on
+    light.livingroom_cornerlight_level:
+      state: on
+      brightness: 180
+    switch.bedroom_window_switch:
+      state: on
+
+- name: "TV"
+  entities:
+    switch.kitchen_window_switch:
+      state: off
+    switch.hall_spegel_switch:
+      state: off
+    switch.livingroom_window_switch:
+      state: off
+    light.livingroom_cornerlight_level:
+      state: on
+      brightness: 100
+    switch.bedroom_window_switch:
+      state: off
+    light.bedroom_erika_bedside_level:
+      state: on
+      brightness: 50
+    light.bedroom_isakbedside_level:
+      state: on
+      brightness: 50
+    light.kitchen_spotlight_level:
+      state: off
+    switch.kitchen_tolomeo_switch:
+      state: off

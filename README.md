@@ -11,9 +11,10 @@ This is a copy of my Home Assistant Configuration. The configuration is a work i
 * 1 x CAT-6 Cable
 
 **Z-Wave Devices**
-* 6 x Fibaro Wall Plug
+* 7 x Fibaro Wall Plug
 * 3 x NEXA AD-147 Dimmable Wall Plug
 * 1 x Fibaro Dimmer 2
+* 1 x Aeon Labs Multisensor 6
 
 **Other smart devices**
 * 1 x SONOS Playbar

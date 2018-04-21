@@ -3,7 +3,7 @@ include:
   entities:
     - device_tracker.erikasiphone
     - device_tracker.isaksiphone
-    - switch.samsung_tv
+    - binary_sensor.samsung_tv_ping
     - media_player.vardagsrum
     - media_player.sovrum
     - sun.sun

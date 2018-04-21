@@ -33,8 +33,7 @@
     entities:
       - switch.livingroom_window_switch
       - light.livingroom_cornerlight_level
-      - switch.samsung_tv
-      - switch.hdmi_4
+      - binary_sensor.samsung_tv_ping
 
 # Subgroup 1.3
   sub1_3:
@@ -108,26 +107,8 @@
     entities:
       - group.scenepicker
       - group.alarmclock
-      - group.automatic_scenes
-      - group.notifications
-
-  automatic_scenes:
-    name: Automatiska scenkörningar
-    entities:
-      - automation.scen_hemma_vid_hemkomst_och_morkt
-      - automation.scen_hemma_vid_solnedgang
-      - automation.scen_tv_da_apple_tv_spelar
-      - automation.scen_hemma_da_apple_tv_pausas
-
-  notifications:
-    name: Notifieringar
-    entities:
-      - automation.kaffebryggare_av_efter_60_minuter
-      - automation.erika_kommer_hem
-      - automation.erika_nastan_hemma
-      - automation.isak_kommer_hem
-      - automation.isak_nastan_hemma
-      - automation.nagot_ar_pa_och_ingen_ar_hemma
+      - group.all_automations
+      - group.all_scenes
 
 
 #######################################

@@ -1,0 +1,54 @@
+- alias: "Scen Hemma vid solnedgång"
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:00:15'
+
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.scenepicker
+        option: "Hemma"
+- alias: "Scen TV då TV slås på"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.samsung_tv_ping
+    to: 'on'
+
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: "-01:00:00"
+
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.scenepicker
+        option: "TV"
+- alias: "Scen Småbelysning då TV slås av"
+  trigger:
+    platform: state
+    entity_id: binary_sensor.samsung_tv_ping
+    to: 'off'
+
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: "-01:00:00"
+
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.scenepicker
+        option: "Småbelysning"
