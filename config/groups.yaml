@@ -54,105 +54,35 @@
 # Subgroup 1.5
   sub1_5:
     name: Badrum
+    control: hidden
     entities:
       - switch.bathroom_wallplug_switch
+      - group.sub1_5_1
+
+  sub1_5_1:
+    name: Badrumsssensorer
+    entities:
       - binary_sensor.bathroom_aeotec_sensor
       - sensor.bathroom_aeotec_temperature
       - sensor.bathroom_aeotec_relative_humidity
       - sensor.bathroom_aeotec_luminance
 
+
 #######################################
 #####         MAIN GROUP 2        #####
-#####           Kitchen           #####
+#####             Media           #####
 #######################################
-  kitchen:
+  media:
     view: yes
-    name: "Kök"
+    name: "Media"
     entities:
-      - group.sub2_1
-      - group.sub2_2
-
-# Subgroup 2.1
-  sub2_1:
-    name: "Lampor"
-    control: hidden
-    entities:
-      - switch.kitchen_window_switch
-      - light.kitchen_spotlight_level
-      - switch.kitchen_tolomeo_switch
-
-# Subgroup 2.2
-  sub2_2:
-    name: "Kaffebryggare"
-    control: hidden
-    entities:
-      - switch.kitchen_coffeebrewer_switch
-      - automation.kaffebryggare_av_efter_60_minuter
-
+      - group.tvcontrol
+      - media_player.vardagsrum
+      - media_player.sovrum
+      - media_player.apple_tv
 
 #######################################
 #####         MAIN GROUP 3        #####
-#####         Living room         #####
-#######################################
-  livingroom:
-    view: yes
-    name: "Vardagsrum"
-    entities:
-      - group.sub3_1
-      - group.tvcontrol
-      - media_player.vardagsrum
-      - media_player.apple_tv
-
-# Subgroup 3.1
-  sub3_1:
-    name: "Lampor"
-    control: hidden
-    entities:
-      - switch.livingroom_window_switch
-      - light.livingroom_cornerlight_level
-
-
-#######################################
-#####         MAIN GROUP 4        #####
-#####           Bedroom           #####
-#######################################
-  bedroom:
-    view: yes
-    name: "Sovrum"
-    entities:
-      - group.sub4_1
-      - media_player.sovrum
-      - group.alarmclock
-
-# Subgroup 4.1
-  sub4_1:
-    name: "Lampor"
-    control: hidden
-    entities:
-      - switch.bedroom_window_switch
-      - light.bedroom_erikabedside_level
-      - light.bedroom_isakbedside_level
-
-
-#######################################
-#####         MAIN GROUP 5        #####
-#####            Hall             #####
-#######################################
-  hall:
-    view: yes
-    name: "Hall"
-    entities:
-      - group.sub5_1
-
-# Subgroup 5.1
-  sub5_1:
-    name: "Lampor"
-    entities:
-      - switch.hall_spegel_switch
-
-
-#######################################
-#####         MAIN GROUP 6        #####
 #####           Weather           #####
 #######################################
   weather:
@@ -167,7 +97,7 @@
 
 
 #######################################
-#####         MAIN GROUP 7        #####
+#####         MAIN GROUP 4        #####
 #####           Settings          #####
 #######################################
 # Settings
@@ -177,6 +107,7 @@
     icon: mdi:tune
     entities:
       - group.scenepicker
+      - group.alarmclock
       - group.automatic_scenes
       - group.notifications
 
@@ -191,6 +122,7 @@
   notifications:
     name: Notifieringar
     entities:
+      - automation.kaffebryggare_av_efter_60_minuter
       - automation.erika_kommer_hem
       - automation.erika_nastan_hemma
       - automation.isak_kommer_hem
@@ -199,7 +131,7 @@
 
 
 #######################################
-#####         MAIN GROUP 8        #####
+#####         MAIN GROUP 5        #####
 #####           Sensors           #####
 #######################################
   sensors:
@@ -207,20 +139,8 @@
     view: yes
     icon: mdi:gauge
     entities:
-      - group.batteries
-      - group.powerconsumption
       - group.system
-
-  powerconsumption:
-    name: "Elförbrukning"
-    entities:
-      - sensor.hall_spegel_power
-      - sensor.livingroom_window_power
-      - sensor.bedroom_window_power
-      - sensor.kitchen_window_power
-      - sensor.kitchen_tolomeo_power
-      - sensor.kitchen_spotlight_power
-      - sensor.kitchen_coffeebrewer_power
+      - group.batteries
 
   system:
     name: "Systemstatus"
@@ -228,10 +148,9 @@
       - sensor.memory_use_percent
       - sensor.processor_use
       - sensor.disk_use_percent_
-      - sensor.since_last_boot
+      - sensor.uptime
 
   batteries:
-    name: Batterier
+    name: "Batterier"
     entities:
-      - sensor.erikas_iphone_battery_level
-      - sensor.isaks_iphone_battery_level
+      - sensor.battery_aeotec

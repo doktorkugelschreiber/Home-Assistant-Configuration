@@ -134,3 +134,4 @@ group: !include config/groups.yaml
 automation: !include_dir_list config/automations/
 zone: !include config/zones.yaml
 script: !include_dir_named config/scripts/
+scene: !include_dir_named config/scenes/

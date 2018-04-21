@@ -5,4 +5,13 @@
         arg: /
       - type: memory_use_percent
       - type: processor_use
-      - type: since_last_boot
+
+# Uptime
+  - platform: uptime
+
+# Z Wave battery devices
+  - platform: template
+    sensors:
+      battery_aeotec:
+        friendly_name: "Aeotec 1"
+        value_template: "{{states.zwave.bathroom_aeotec.attributes['battery_level']}}"

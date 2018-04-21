@@ -10,7 +10,8 @@ switch.hall_spegel_switch:
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
   extra_badge:
-    entity_id: sensor.hall_spegel_power
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
 
 # Vardagsrummet
@@ -20,7 +21,8 @@ switch.livingroom_window_switch:
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
   extra_badge:
-    entity_id: sensor.livingroom_window_power
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
 
 light.livingroom_cornerlight_level:
@@ -46,7 +48,8 @@ switch.bedroom_window_switch:
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
   extra_badge:
-    entity_id: sensor.bedroom_window_power
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
 
 light.bedroom_isakbedside_level:
@@ -70,7 +73,8 @@ switch.kitchen_window_switch:
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
   extra_badge:
-    entity_id: sensor.kitchen_window_power
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
 
 switch.kitchen_tolomeo_switch:
@@ -79,7 +83,8 @@ switch.kitchen_tolomeo_switch:
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
   extra_badge:
-    entity_id: sensor.kitchen_tolomeo_power
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
 
 light.kitchen_spotlight_level:
@@ -89,7 +94,8 @@ light.kitchen_spotlight_level:
   state_card_mode: break-slider
   stretch_slider: true
   extra_badge:
-    entity_id: sensor.kitchen_spotlight_power
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
 
 switch.kitchen_coffeebrewer_switch:
@@ -99,7 +105,8 @@ switch.kitchen_coffeebrewer_switch:
   homebridge_switch_type: outlet
   custom_ui_state_card: state-card-custom-ui
   extra_badge:
-    entity_id: sensor.kitchen_coffeebrewer_power
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
 
 # Badrummet
@@ -108,9 +115,9 @@ switch.bathroom_wallplug_switch:
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
   extra_badge:
-    entity_id: sensor.bathroom_wallplug_switch
+    attribute: power_consumption
+    unit: W
     blacklist_states: 0
-
 ####################################################
 #                                                  #
 #                   MEDIA PLAYERS                  #
@@ -176,7 +183,7 @@ sensor.since_last_boot:
 sensor.bathroom_aeotec_relative_humidity:
   icon: mdi:water-percent
 
-sensor.bathroom_aeotec_temperature:
+sensor.bathroom_aeotec_luminance:
   icon: mdi:theme-light-dark
 
 ####################################################
@@ -215,3 +222,7 @@ input_select.scenepicker:
 ####################################################
 zone.home:
   track_ios: false
+
+group.sub1_5_1:
+  custom_ui_state_card: state-card-custom-ui
+  state_card_mode: badges

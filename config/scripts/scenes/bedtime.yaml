@@ -13,9 +13,6 @@ sequence:
   - service: switch.turn_on
     entity_id: switch.kitchen_window_switch
 
-  - service: homeassistant.turn_off
-    entity_id: input_boolean.tv_onoff
-
   - delay: 00:00:02
 
   - service_template: >

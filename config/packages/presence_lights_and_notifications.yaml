@@ -117,4 +117,4 @@ automation:
 
       - service: notify.ios_erikasiphone
         data:
-          smessage: "Du glömde släcka innan du gick. Jag har gjort det åt dig."
+          message: "Du glömde släcka innan du gick. Jag har gjort det åt dig."

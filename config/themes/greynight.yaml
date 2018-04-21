@@ -2,7 +2,7 @@
 ## Original thread: https://community.home-assistant.io/t/grey-night-theme/30848
 
 # MyVariables
-  base-hue: '220' #Controls the base (and accent) color hue (0-360) | 0=Red 60=Yellow 120=Green 180=Cyan 240=Blue 300=Magenta 360=Red
+  base-hue: '60' #Controls the base (and accent) color hue (0-360) | 0=Red 60=Yellow 120=Green 180=Cyan 240=Blue 300=Magenta 360=Red
   base-sat: '5%' #Controls the saturation of the theme (0%-100%) | 0%=Grey 100%=Full Saturation
   # MyVar
   huesat: 'var(--base-hue), var(--base-sat),'
@@ -51,7 +51,7 @@
   paper-tab-ink: 'hsl(var(--huesat) 70%)'
   paper-input-container-color: 'hsl(var(--huesat) 60%)'
   # Labels
-  label-badge-red: 'var(--paper-card-background-color)'
+  label-badge-red: 'hsl(var(--huesat) 16%)'
   label-badge-border-color: 'var(--label-badge-red)'
   label-badge-background-color: 'var(--paper-card-background-color)'
   label-badge-text-color: 'var(--primary-text-color)'

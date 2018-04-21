@@ -61,7 +61,7 @@ sensor:
         value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.alarm_hour") | int, states("input_number.alarm_minute") | int) }}'
 # Template sensor to show state as a badge in frontend
       alarm_activated_badge:
-        friendly_name: "Alarm"
+        friendly_name: "Väckning"
         value_template: >
           {% if is_state("input_boolean.alarm_activated", "on") %}
             {{states.sensor.alarm_time.state}}
