@@ -37,10 +37,11 @@ input_select:
     icon: mdi:weather-sunset
     options:
       - "Morgon"
-      - "Allt av"
+      - "Borta"
       - "Småbelysning"
       - "TV"
       - "Läggdags"
+      - "Sova"
 
 ##############################################################################
 ## AUTOMATIONS
@@ -60,7 +61,9 @@ automation:
         entity_id: >
           {% if is_state("input_select.scenepicker", "Morgon") %}
             scene.morgon
-          {%-elif is_state("input_select.scenepicker", "Allt av") %}
+          {%-elif is_state("input_select.scenepicker", "Borta") %}
+            scene.allt_av
+          {%-elif is_state("input_select.scenepicker", "Sova") %}
             scene.allt_av
           {%-elif is_state("input_select.scenepicker", "Småbelysning") %}
             scene.smabelysning

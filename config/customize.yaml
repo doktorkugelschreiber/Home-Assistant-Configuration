@@ -17,7 +17,7 @@ light.livingroom_cornerlight_level:
   state_card_mode: break-slider
   stretch_slider: true
 switch.livingroom_window_switch:
-  friendly_name: Fönster
+  friendly_name: Vardagsrumsfönster
   icon: mdi:lightbulb
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
@@ -47,7 +47,7 @@ light.bedroom_erikabedside_level:
   state_card_mode: break-slider
   stretch_slider: true
 switch.bedroom_window_switch:
-  friendly_name: Fönster
+  friendly_name: Sovrumsfönster
   icon: mdi:lightbulb
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
@@ -68,7 +68,7 @@ light.kitchen_spotlight_level:
     unit: W
     blacklist_states: 0
 switch.kitchen_window_switch:
-  friendly_name: Fönster
+  friendly_name: Köksfönster
   icon: mdi:lightbulb
   homebridge_visible: true
   custom_ui_state_card: state-card-custom-ui
@@ -130,8 +130,21 @@ sensor.dark_sky_wind_speed:
   friendly_name: Vind
   icon: mdi:weather-windy
 
+# Grupper
+group.all_automations:
+  hidden: false
+  friendly_name: Automationer
+group.sub1_1_1:
+  custom_ui_state_card: state-card-custom-ui
+  state_card_mode: badges
 
+# Zoner
+zone.home:
+  track_ios: false
 
+# Input select
+input_select.scenepicker:
+  friendly_name: "Scen"
 
 
 sensor.bathroom_aeotec_relative_humidity:
@@ -139,30 +152,3 @@ sensor.bathroom_aeotec_relative_humidity:
 
 sensor.bathroom_aeotec_luminance:
   icon: mdi:theme-light-dark
-
-####################################################
-#                                                  #
-#                 INTERNET SENSORS                 #
-#                                                  #
-####################################################
-
-
-####################################################
-#                                                  #
-#                  INPUT SELECT                    #
-#                                                  #
-####################################################
-input_select.scenepicker:
-  friendly_name: "Scen"
-
-####################################################
-#                                                  #
-#                     ZONING                       #
-#                                                  #
-####################################################
-zone.home:
-  track_ios: false
-
-group.sub1_5_1:
-  custom_ui_state_card: state-card-custom-ui
-  state_card_mode: badges

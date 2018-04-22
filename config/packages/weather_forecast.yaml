@@ -281,6 +281,7 @@ group:
 
 automation:
   - id: update_friendly_names
+    hide_entity: true
     alias: "Update friendly names"
     trigger:
       - platform: state

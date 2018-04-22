@@ -41,7 +41,7 @@ ios:
         identifier: 'coffeetimer'
         actions:
           - identifier: 'COFFEE_20_MINUTES'
-            title: '20 minuter till'
+            title: 'Det där sköter jag själv.'
             activationMode: 'background'
             authenticationRequired: no
             destructive: no

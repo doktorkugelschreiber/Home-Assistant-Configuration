@@ -22,7 +22,11 @@
       state: off
     script.scene_bedtime_delay:
       state: on
-  
+    media_player.vardagsrum:
+      state: paused
+    media_player.sovrum:
+      state: paused
+
 - name: "Allt_av"
   entities:
     switch.kitchen_window_switch:
@@ -41,10 +45,14 @@
       state: off
     switch.bedroom_window_switch:
       state: off
-    light.bedroom_erika_bedside_level:
+    light.bedroom_erikabedside_level:
       state: off
     light.bedroom_isakbedside_level:
       state: off
+    media_player.vardagsrum:
+      state: paused
+    media_player.sovrum:
+      state: paused
 
 - name: "Morgon"
   entities:
@@ -85,7 +93,7 @@
       brightness: 100
     switch.bedroom_window_switch:
       state: off
-    light.bedroom_erika_bedside_level:
+    light.bedroom_erikabedside_level:
       state: on
       brightness: 50
     light.bedroom_isakbedside_level:
@@ -95,3 +103,5 @@
       state: off
     switch.kitchen_tolomeo_switch:
       state: off
+    media_player.sovrum:
+      state: paused

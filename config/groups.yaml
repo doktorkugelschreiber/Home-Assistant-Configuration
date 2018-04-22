@@ -1,5 +1,7 @@
+#######################################
 #####         MAIN GROUP 1        #####
 ##### Home/Default view/Dashboard #####
+#######################################
   default_view:
     view: yes
     icon: mdi:home
@@ -16,7 +18,7 @@
       - group.sub1_4
       - group.sub1_5
 
-# Subgroup 1.1
+# Subgroup 1.1 - Kök
   sub1_1:
     name: "Kök"
     control: hidden
@@ -25,8 +27,17 @@
       - light.kitchen_spotlight_level
       - switch.kitchen_tolomeo_switch
       - switch.kitchen_coffeebrewer_switch
+      - group.sub1_1_1
 
-# Subgroup 1.2
+  sub1_1_1:
+    name: Kökssensorer
+    entities:
+      - binary_sensor.bathroom_aeotec_sensor
+      - sensor.bathroom_aeotec_temperature
+      - sensor.bathroom_aeotec_relative_humidity
+      - sensor.bathroom_aeotec_luminance
+
+# Subgroup 1.2 - Vardagsrum
   sub1_2:
     name: Vardagsrum
     control: hidden
@@ -35,7 +46,7 @@
       - light.livingroom_cornerlight_level
       - binary_sensor.samsung_tv_ping
 
-# Subgroup 1.3
+# Subgroup 1.3 - Sovrum
   sub1_3:
     name: Sovrum
     control: hidden
@@ -44,28 +55,18 @@
       - light.bedroom_erikabedside_level
       - light.bedroom_isakbedside_level
 
-# Subgroup 1.4
+# Subgroup 1.4 - Hall
   sub1_4:
     name: Hall
     entities:
       - switch.hall_spegel_switch
 
-# Subgroup 1.5
+# Subgroup 1.5 - Badrum
   sub1_5:
     name: Badrum
     control: hidden
     entities:
       - switch.bathroom_wallplug_switch
-      - group.sub1_5_1
-
-  sub1_5_1:
-    name: Badrumsssensorer
-    entities:
-      - binary_sensor.bathroom_aeotec_sensor
-      - sensor.bathroom_aeotec_temperature
-      - sensor.bathroom_aeotec_relative_humidity
-      - sensor.bathroom_aeotec_luminance
-
 
 #######################################
 #####         MAIN GROUP 2        #####
@@ -73,9 +74,9 @@
 #######################################
   media:
     view: yes
+    icon: mdi:speaker-wireless
     name: "Media"
     entities:
-      - group.tvcontrol
       - media_player.vardagsrum
       - media_player.sovrum
       - media_player.apple_tv
@@ -91,7 +92,6 @@
     entities:
       - group.weather_card_today
       - group.weather_card_forecast
-      - group.almanacka
       - group.pollenkoll
 
 
@@ -99,7 +99,6 @@
 #####         MAIN GROUP 4        #####
 #####           Settings          #####
 #######################################
-# Settings
   settings:
     name: Settings
     view: yes
@@ -108,7 +107,6 @@
       - group.scenepicker
       - group.alarmclock
       - group.all_automations
-      - group.all_scenes
 
 
 #######################################
