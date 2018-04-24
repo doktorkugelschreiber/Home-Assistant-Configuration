@@ -108,3 +108,13 @@ device_config:
     ignored: true
   sensor.livingroom_window_sourcenodeid:
     ignored: true
+  sensor.bathroom_wallplug_alarm_level:
+    ignored: true
+  sensor.bathroom_wallplug_alarm_type:
+    ignored: true
+  sensor.bathroom_wallplug_exporting:
+    ignored: true
+  sensor.bathroom_wallplug_power_management:
+    ignored: true
+  sensor.bathroom_wallplug_sourcenodeid:
+    ignored: true

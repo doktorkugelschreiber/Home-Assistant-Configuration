@@ -94,6 +94,41 @@
       - group.weather_card_forecast
       - group.pollenkoll
 
+# Subgroup - Weather today
+  weather_card_today:
+    name: "Vädret just nu"
+    entities:
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_wind_speed
+
+# Subgroup - Weather forecast
+  weather_card_forecast:
+    name: Prognos
+    entities:
+      - sensor.forecast_today
+      - sensor.forecast_1
+      - sensor.forecast_2
+      - sensor.forecast_3
+      - sensor.forecast_4
+      - sensor.forecast_5
+      - sensor.forecast_6
+      - sensor.forecast_7
+
+# Subgroup - Pollenkoll
+  pollenkoll:
+    name: "Pollenrapport"
+    entities:
+      - sensor.pollen_al
+      - sensor.pollen_alm
+      - sensor.pollen_bjork
+      - sensor.pollen_bok
+      - sensor.pollen_ek
+      - sensor.pollen_gras
+      - sensor.pollen_grabo
+      - sensor.pollen_hassel
+      - sensor.pollen_salgvide
 
 #######################################
 #####         MAIN GROUP 4        #####
@@ -108,6 +143,21 @@
       - group.alarmclock
       - group.all_automations
 
+# Subgroup - Scene picker
+  scenepicker:
+    name: "Välj scen"
+    entities:
+      - input_select.scenepicker
+
+# Subgroup - Alarm clock
+  alarmclock:
+    name: "Väckarklocka"
+    entities:
+      - input_boolean.alarm_activated
+      - sensor.alarm_time
+      - input_number.alarm_hour
+      - input_number.alarm_minute
+      - input_select.alarm_whotonotify
 
 #######################################
 #####         MAIN GROUP 5        #####

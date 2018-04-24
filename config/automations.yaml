@@ -186,11 +186,14 @@
     entity_id: binary_sensor.bathroom_aeotec_sensor
     to: 'off'
   condition:
-    condition: and
+    condition: or
     conditions:
       - condition: state
         entity_id: input_select.scenepicker
         state: "Sova"
+      - condition: state
+        entity_id: input_select.scenepicker
+        state: "Läggdags"
   action:
     - service: switch.turn_off
       entity_id: switch.kitchen_window_switch
@@ -261,6 +264,98 @@
         option: "Morgon"
     - service: homeassistant.turn_off
       entity_id: input_boolean.alarm_triggered_run_automations
+- alias: "Väckarklocka - Väckning"
+  hide_entity: true
+  trigger:
+    platform: time
+    minutes: '/1'
+    seconds: 0
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.alarm_activated
+        state: 'on'
+      - condition: template
+        value_template: '{{ now().strftime("%H:%M") == states.sensor.alarm_time.state }}'
+  action:
+    - service_template: >
+        {% if is_state("input_select.alarm_whotonotify", "Erika") %}
+          notify.ios_erikasiphone
+        {% else %}
+          notify.ios_isaksiphone
+        {% endif %}
+      data:
+        title: "Väckarklocka"
+        message: "Dags att gå upp. Vill du starta morgonscenen?"
+        data:
+          push:
+            category:
+              'alarmclock'
+- alias: "Väckarklocka - iOS-val: Kvittera väckning med automation"
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: ALARM_AWAKE
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.alarm_activated
+    - service: media_player.media_pause
+      entity_id: media_player.sovrum
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.alarm_triggered_run_automations
+- alias: "Väckarklocka - iOS-val: Kvittera väckning utan automation"
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: ALARM_NOT_AWAKE
+  action:
+    - service: media_player.media_pause
+      entity_id: media_player.sovrum
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.alarm_activated
+- alias: "Väckarklocka - Slå på Sonos-väckning"
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_boolean.alarm_activated
+    to: 'on'
+  action:
+    service: media_player.sonos_update_alarm
+    data_template:
+      entity_id: media_player.sovrum
+      alarm_id: 1
+      time: '{{ states.sensor.alarm_time.state }}'
+      enabled: true
+- alias: "Väckarklocka - Stäng av Sonos-väckning"
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.alarm_activated
+      to: 'off'
+  action:
+    service: media_player.sonos_update_alarm
+    data_template:
+      entity_id: media_player.sovrum
+      alarm_id: 1
+      enabled: false
+- alias: "Väckarklocka - Uppdatera Sonosväckning"
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: input_number.alarm_hour
+    - platform: state
+      entity_id: input_number.alarm_minute
+  action:
+    service: media_player.sonos_update_alarm
+    data_template:
+      entity_id: media_player.sovrum
+      alarm_id: 1
+      time: '{{ states.sensor.alarm_time.state }}'
 
 # iOS Notification automations - hidden from frontend
 - alias: "iOS - Val: Stäng av kaffebryggare"
@@ -306,3 +401,50 @@
       event: start
   action:
     - service: python_script.count_entities_on
+
+# Weather forecast - hidden from frontend
+- id: update_friendly_names
+  hide_entity: true
+  alias: "Update friendly names"
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.forecast_1
+        - sensor.forecast_2
+        - sensor.forecast_3
+        - sensor.forecast_4
+        - sensor.forecast_5
+        - sensor.forecast_6
+        - sensor.forecast_7
+    - platform: homeassistant
+      event: start
+  action:
+    - service: python_script.dark_sky_friendly_names
+      data_template:
+        entityid: '{{trigger.entity_id}}'
+
+# Scene picker - hidden from frontend
+- alias: "Kör scen"
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.scenepicker
+  action:
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.scenepicker", "Morgon") %}
+            scene.morgon
+          {%-elif is_state("input_select.scenepicker", "Borta") %}
+            scene.allt_av
+          {%-elif is_state("input_select.scenepicker", "Sova") %}
+            scene.allt_av
+          {%-elif is_state("input_select.scenepicker", "Småbelysning") %}
+            scene.smabelysning
+          {%-elif is_state("input_select.scenepicker", "TV") %}
+            scene.tv
+          {%-elif is_state("input_select.scenepicker", "Läggdags") %}
+            scene.bedtime
+          {% else %}
+            none
+          {% endif %}

@@ -1,0 +1,19 @@
+# Alarm clock
+alarm_whotonotify:
+  name: "Vem går upp först?"
+  icon: mdi:account
+  options:
+    - Isak
+    - Erika
+
+# Scenepicker
+scenepicker:
+  name: "Scen"
+  icon: mdi:weather-sunset
+  options:
+    - "Morgon"
+    - "Borta"
+    - "Småbelysning"
+    - "TV"
+    - "Läggdags"
+    - "Sova"

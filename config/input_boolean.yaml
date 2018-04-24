@@ -1,0 +1,7 @@
+# Alarm clock
+alarm_activated:
+  name: "På/Av"
+  icon: mdi:timer
+  initial: off
+alarm_triggered_run_automations:
+    initial: off

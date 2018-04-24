@@ -11,9 +11,6 @@ homeassistant:
   time_zone: Europe/Stockholm
   customize: !include config/customize.yaml
 
-# https://home-assistant.io/docs/configuration/packages/
-  packages: !include_dir_named config/packages/
-
 # https://github.com/andrey-git/home-assistant-customizer
 customizer:
   custom_ui: local
@@ -56,13 +53,7 @@ ios:
         identifier: 'alarmclock'
         actions:
           - identifier: 'ALARM_AWAKE'
-            title: 'Ja, nu'
-            activationMode: 'background'
-            authenticationRequired: no
-            destructive: no
-            behavior: 'default'
-          - identifier: 'ALARM_AWAKE_SHOWER_FIRST'
-            title: 'Ja, efter min dusch'
+            title: 'Ja'
             activationMode: 'background'
             authenticationRequired: no
             destructive: no
@@ -136,3 +127,6 @@ automation: !include config/automations.yaml
 zone: !include config/zones.yaml
 script: !include config/scripts.yaml
 scene: !include config/scenes.yaml
+input_number: !include config/input_number.yaml
+input_select: !include config/input_select.yaml
+input_boolean: !include config/input_boolean.yaml

@@ -1,17 +1,481 @@
 # System health information
-  - platform: systemmonitor
-    resources:
-      - type: disk_use_percent
-        arg: /
-      - type: memory_use_percent
-      - type: processor_use
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: processor_use
 
 # Uptime
-  - platform: uptime
+- platform: uptime
 
 # Z Wave battery devices
-  - platform: template
-    sensors:
-      battery_aeotec:
-        friendly_name: "Aeotec 1"
-        value_template: "{{states.zwave.bathroom_aeotec.attributes['battery_level']}}"
+- platform: template
+  sensors:
+    battery_aeotec:
+      friendly_name: "Aeotec 1"
+      value_template: "{{states.zwave.bathroom_aeotec.attributes['battery_level']}}"
+
+# Weather forecast
+- platform: darksky
+  api_key: !secret darksky_api_key
+  forecast:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+  monitored_conditions:
+    - summary
+    - temperature
+    - temperature_min
+    - temperature_max
+    - precip_probability
+    - icon
+    - precip_intensity
+    - wind_speed
+    - cloud_cover
+- platform: template
+  sensors:
+    weekday:
+      friendly_name: 'Weekday'
+      value_template: '{{ now().strftime("%A") }}'
+    forecast_today:
+      friendly_name: "Idag"
+      value_template: >
+        {{states.sensor.dark_sky_daily_high_temperature.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+    forecast_1:
+      friendly_name: 'Imorgon'
+      value_template: >
+        {{states.sensor.dark_sky_daily_high_temperature_1.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature_1.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability_1.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon_1", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon_1", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon_1", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon_1", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon_1", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon_1", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon_1", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon_1", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon_1", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon_1", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+    forecast_2:
+      friendly_name: 'Second'
+      value_template: >
+        {{states.sensor.dark_sky_daily_high_temperature_2.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature_2.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability_2.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon_2", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon_2", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon_2", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon_2", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon_2", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon_2", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon_2", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon_2", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon_2", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon_2", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+    forecast_3:
+      friendly_name: 'Third'
+      value_template: >
+        {{states.sensor.dark_sky_daily_high_temperature_3.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature_3.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability_3.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon_3", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon_3", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon_3", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon_3", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon_3", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon_3", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon_3", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon_3", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon_3", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon_3", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+    forecast_4:
+      friendly_name: 'Fourth'
+      value_template: >
+        {{states.sensor.dark_sky_daily_high_temperature_4.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature_4.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability_4.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon_4", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon_4", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon_4", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon_4", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon_4", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon_4", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon_4", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon_4", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon_4", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon_4", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+    forecast_5:
+      friendly_name: 'Fifth'
+      value_template: >
+        {{states.sensor.dark_sky_daily_high_temperature_5.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature_5.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability_5.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon_5", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon_5", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon_5", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon_5", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon_5", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon_5", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon_5", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon_5", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon_5", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon_5", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+    forecast_6:
+      friendly_name: 'Sixth'
+      value_template: >
+          {{states.sensor.dark_sky_daily_high_temperature_6.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature_6.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability_6.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon_6", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon_6", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon_6", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon_6", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon_6", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon_6", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon_6", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon_6", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon_6", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon_6", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+    forecast_7:
+      friendly_name: 'Seventh'
+      value_template: >
+          {{states.sensor.dark_sky_daily_high_temperature_7.state|round(0)}}°/{{states.sensor.dark_sky_daily_low_temperature_7.state|round(0)}}°/{{states.sensor.dark_sky_precip_probability_7.state|round(0)}}%
+      icon_template: >-
+        {% if is_state("sensor.dark_sky_icon_7", "clear-day") %}
+          mdi:weather-sunny
+        {% elif is_state("sensor.dark_sky_icon_7", "clear-night") %}
+          mdi:weather-night
+        {% elif is_state("sensor.dark_sky_icon_7", "cloudy") %}
+          mdi:weather-cloudy
+        {% elif is_state("sensor.dark_sky_icon_7", "rain") %}
+          mdi:weather-pouring
+        {% elif is_state("sensor.dark_sky_icon_7", "sleet") %}
+          mdi:weather-snowy-rain
+        {% elif is_state("sensor.dark_sky_icon_7", "snow") %}
+          mdi:weather-snowy
+        {% elif is_state("sensor.dark_sky_icon_7", "wind") %}
+          mdi:weather-windy
+        {% elif is_state("sensor.dark_sky_icon_7", "fog") %}
+          mdi:weather-fog
+        {% elif is_state("sensor.dark_sky_icon_7", "partly-cloudy-day") %}
+          mdi:weather-partlycloudy
+        {% elif is_state("sensor.dark_sky_icon_7", "partly-cloudy-night") %}
+          mdi:weather-partlycloudy
+        {% else %}
+          error
+        {% endif %}
+
+# Alarm clock
+- platform: template
+  sensors:
+    alarm_time:
+      friendly_name: "Tid"
+      icon_template: mdi:alarm
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.alarm_hour") | int, states("input_number.alarm_minute") | int) }}'
+    alarm_activated_badge:
+      friendly_name: "Väckning"
+      value_template: >
+        {% if is_state("input_boolean.alarm_activated", "on") %}
+          {{states.sensor.alarm_time.state}}
+        {% else %}
+          Av
+        {% endif %}
+
+# Pollenkoll
+- platform: pollenkoll
+  sensors:
+    - city: Stockholm
+      state: Gräs
+- platform: template
+  sensors:
+    pollen_al:
+      friendly_name: "Al"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Al']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Al'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Al'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_alm:
+      friendly_name: "Alm"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Alm']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Alm'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Alm'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_bjork:
+      friendly_name: "Björk"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Björk']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Björk'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Björk'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_bok:
+      friendly_name: "Bok"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Bok']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Bok'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Bok'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_ek:
+      friendly_name: "Ek"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Ek']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Ek'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Ek'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_gras:
+      friendly_name: "Gräs"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Gräs']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gräs'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_grabo:
+      friendly_name: "Gråbo"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Gråbo']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Gråbo'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_hassel:
+      friendly_name: "Hassel"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Hassel']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Hassel'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
+    pollen_salgvide:
+      friendly_name: "Sälg / vide"
+      value_template: "{{states.sensor.pollenkoll_stockholm.attributes['Sälg / vide']}}"
+      entity_picture_template: >
+        {% if states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "i.u." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "i.h." %}
+          /local/pollenstatus_iu.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "L" %}
+          /local/pollenstatus_ih-l.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "L-M" %}
+          /local/pollenstatus_l-m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "M" %}
+          /local/pollenstatus_m.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "M-H" %}
+          /local/pollenstatus_m-h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "H" %}
+          /local/pollenstatus_h.png
+        {% elif states.sensor.pollenkoll_stockholm.attributes['Sälg / vide'] == "H+" %}
+          /local/pollenstatus_hplus.png
+        {% endif %}
